@@ -1,16 +1,11 @@
-# {PROJECT_NAME}
+# Shine
 
-Краткое описание проекта
-
-## Документация
-
-[Документация находится здесь](documentation)
+Backend for Shine app on Laravel + Admin Panel
 
 ## Installation
 
 ```bash
-git clone git@github.com:enterprise-it-ru/{PROJECT_NAME}.git {PROJECT_NAME}.local
-cd {PROJECT_NAME}.local
+git clone 
 composer install
 ```
 
@@ -22,6 +17,13 @@ cp .env.example .env
 
 ```bash
 php artisan key:generate
+```
+```bash
+php artisan migrate
+```
+
+```bash
+php artisan db:seed
 ```
 
 ```bash
@@ -38,20 +40,14 @@ For development mode, use the command
 npm run dev
 ```
 
-## Установка в докере
-
-Если нет make, то взять команды из makefile и выполнять напрямую
-
-Запуск контейнера.
+## Docker installation
 
 ```bash
 make up
 ```
 
-Открыть консоль:
+To open console:
 
 ```
 make shell
 ```
-
-В консоли уже можно продолжить обычную установку с шага composer install
