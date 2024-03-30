@@ -165,6 +165,28 @@ class PropertiesSeeder extends Seeder
                 'code' 	=> 'pisces',
 				'value'	=> 'Рыбы'
 			],
+
+			// Статусы пользователя
+			[
+                'code' 	=> 'confirmation',
+				'value'	=> 'Подтверждение почты'
+			],
+			[
+                'code' 	=> 'moderation',
+				'value'	=> 'На модерации'
+			],
+			[
+                'code' 	=> 'rejected',
+				'value'	=> 'Отклонён модерацией'
+			],
+			[
+                'code' 	=> 'blocked',
+				'value'	=> 'Заблокирован'
+			],
+			[
+                'code' 	=> 'published',
+				'value'	=> 'Опубликован'
+			],
         ];
 
         DB::transaction(function () use ($properties) {
