@@ -26,8 +26,8 @@ return new class extends Migration
             $table->foreignId('smoking')->constrained('properties')->nullable();
             $table->foreignId('alcohol')->constrained('properties')->nullable();
             $table->foreignId('education')->constrained('properties')->nullable();
-            $table->foreignId('languages')->constrained('properties')->nullable();
             
+            $table->foreignId('sign')->constrained('properties')->nullable();
             $table->integer('height')->nullable();
             $table->json('tags')->nullable();
 
