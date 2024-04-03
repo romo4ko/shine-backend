@@ -187,6 +187,20 @@ class PropertiesSeeder extends Seeder
                 'code' 	=> 'published',
 				'value'	=> 'Опубликован'
 			],
+
+			// Типы предсказаний
+			[
+                'code' 	=> 'funny',
+				'value'	=> 'Грубые и смешные'
+			],
+			[
+                'code' 	=> 'needful',
+				'value'	=> 'Нежные и нужные'
+			],
+			[
+                'code' 	=> 'mixed',
+				'value'	=> 'Смешанные'
+			],
         ];
 
         DB::transaction(function () use ($properties) {
