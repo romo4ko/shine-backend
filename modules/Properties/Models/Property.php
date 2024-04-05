@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Property\Models;
+namespace Modules\Properties\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

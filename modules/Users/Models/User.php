@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Modules\User\Models;
+namespace Modules\Users\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;

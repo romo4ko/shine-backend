@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Modules\Auth\Controllers;
 
 use App\Http\Controllers\Controller;
-use Modules\User\Models\User;
+use Modules\Users\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
