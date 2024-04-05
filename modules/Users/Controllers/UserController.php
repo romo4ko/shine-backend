@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Modules\Users\Controllers;
 
@@ -39,8 +40,8 @@ class UserController extends Controller
         //
     }
 
-    public function deleteUser(User $user)
+    public function deleteUser()
     {
-        $user = Auth::user();
+        //
     }
 }
