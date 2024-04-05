@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Properties;
-use App\Models\PropertyValues;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Modules\Property\Models\Property;
 
 class PropertiesSeeder extends Seeder
 {
@@ -205,7 +204,7 @@ class PropertiesSeeder extends Seeder
 
         DB::transaction(function () use ($properties) {
             foreach ($properties as $property) {
-                $list = Properties::updateOrCreate(
+                $list = Property::updateOrCreate(
                     [
                         'code' => $property['code'],
                     ],
