@@ -12,8 +12,8 @@ class Properties extends Model
     public $timestamps = false;
 
     protected $fillable = [
-		'code',
-		'value',
-	];
+        'code',
+        'value',
+    ];
 
 }

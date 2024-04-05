@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      */
@@ -19,14 +18,14 @@ return new class extends Migration
             $table->date('birthdate')->nullable();
             $table->foreignId('sex')->nullable();
             $table->foreignId('city')->constrained('cities')->nullable();
-            
+
             $table->foreignId('purpose')->constrained('properties')->nullable()->comment('Цель знакомства');
             $table->foreignId('fs')->constrained('properties')->nullable()->comment('Семейное положение');
             $table->foreignId('children')->constrained('properties')->nullable();
             $table->foreignId('smoking')->constrained('properties')->nullable();
             $table->foreignId('alcohol')->constrained('properties')->nullable();
             $table->foreignId('education')->constrained('properties')->nullable();
-            
+
             $table->foreignId('sign')->constrained('properties')->nullable();
             $table->integer('height')->nullable();
             $table->json('tags')->nullable();

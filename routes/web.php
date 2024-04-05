@@ -17,6 +17,6 @@ Route::group(['prefix' => 'api'], function () {
     });
 });
 
-Route::get('/{any}', fn() => view('spa'))
+Route::get('/{any}', fn () => view('spa'))
     ->where('any', '.*')
     ->name('spa');
