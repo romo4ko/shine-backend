@@ -1,19 +1,19 @@
 <?php
+declare(strict_types=1);
 
-namespace Modules\Users\Models;
+namespace Modules\Cities\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserSettings extends Model
+class City extends Model
 {
     public $timestamps = true;
 
     protected $fillable = [
-        'user_id',
-        'active',
-        'status',
-        'bot_settings',
+        'name',
+        'lonlat',
+        'data',
     ];
 
 }

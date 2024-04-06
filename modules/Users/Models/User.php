@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\Properties\Models\Property;
 
 class User extends Authenticatable
 {
@@ -44,4 +45,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected static function booted(): void
+    {
+        // TODO: Отправика письма для подтверждения
+
+        static::created(function (User $user) {
+            UserSettings::create([
+                'user_id' => $user->id,
+                'active' => true,
+                'status' => Property::getId('status.confirmation'),
+                'bot_settings' => Property::where('code', 'mixed')->first()->id
+            ]);
+        });
+    }
 }

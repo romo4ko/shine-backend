@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use Database\Seeders\TestDatabaseSeeder;
 use Modules\Users\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -26,7 +27,14 @@ class DatabaseSeeder extends Seeder
         );
 
         $this->call([
-            PropertiesSeeder::class
+            PropertiesSeeder::class,
+            CitiesSeeder::class,
         ]);
+
+        // if (env('APP_DEBUG')) {
+        //     $this->call([
+        //         TestDatabaseSeeder::class,
+        //     ]); 
+        // }
     }
 }

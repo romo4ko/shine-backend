@@ -1,7 +1,7 @@
 <?php
 
 return  [
-    
+
     // Пол
     'gender' => [
         [
@@ -105,7 +105,7 @@ return  [
     // Образование
     'education' => [
         [
-            'code' 	=> 'no',
+            'code' 	=> 'without',
             'value'	=> 'Нет'
         ],
         [

@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Property extends Model
 {
-    use HasFactory;
-
     public $timestamps = false;
 
     protected $fillable = [
@@ -17,5 +15,12 @@ class Property extends Model
         'code',
         'value',
     ];
+
+    public static function getId(string $typecode): int
+    {
+        $typecode = explode('.', $typecode);
+        
+        return Property::where('type', $typecode[0])->where('code', $typecode[1])->first()->id;
+    }
 
 }

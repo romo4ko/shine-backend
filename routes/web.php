@@ -7,7 +7,7 @@ use Modules\Auth\Controllers\AuthController;
 
 Route::group(['prefix' => 'api'], function () {
 
-    Route::post('/register', [AuthController::class, 'register'])->name('auth.login');
+    Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
     Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
     Route::get('/checkAuth', [AuthController::class, 'getCurrentAuth'])->name('auth.currentAuth');
 
