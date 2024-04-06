@@ -16,7 +16,7 @@ return new class () extends Migration {
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->boolean('active')->default(true);
             $table->foreignId('status')->constrained('properties')->nullable();
-            $table->integer('bot_settings')->default(3);
+            $table->foreignId('bot_settings')->constrained('properties')->nullable();
 
             $table->json('extended')->nullable();
 

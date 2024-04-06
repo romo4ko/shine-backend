@@ -13,6 +13,7 @@ class Property extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'type',
         'code',
         'value',
     ];

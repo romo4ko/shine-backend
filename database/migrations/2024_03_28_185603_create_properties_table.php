@@ -12,7 +12,8 @@ return new class () extends Migration {
     {
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->unique();
+            $table->string('type');
+            $table->string('code');
             $table->string('value');
         });
     }
