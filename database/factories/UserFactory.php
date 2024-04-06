@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
  */
 class UserFactory extends Factory
 {
+    protected $model = \Modules\Users\Models\User::class;
+    
     /**
      * Define the model's default state.
      *

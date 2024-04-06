@@ -16,11 +16,11 @@ class Property extends Model
         'value',
     ];
 
-    public static function getId(string $typecode): int
+    public static function getId(string $typecode): ?int
     {
         $typecode = explode('.', $typecode);
         
-        return Property::where('type', $typecode[0])->where('code', $typecode[1])->first()->id;
+        return Property::select('id')->where('type', $typecode[0])->where('code', $typecode[1])->first('id');
     }
 
 }

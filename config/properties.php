@@ -49,15 +49,15 @@ return  [
     // Отношение к алкоголю
     'alcohol' => [
         [
-            'code' 	=> 'negative',
+            'code' 	=> 'alcohol_negative',
             'value'	=> 'Резко негативно'
         ],
         [
-            'code' 	=> 'neutral',
+            'code' 	=> 'alcohol_neutral',
             'value'	=> 'Нет, но хотелось бы'
         ],
         [
-            'code' 	=> 'positive',
+            'code' 	=> 'alcohol_positive',
             'value'	=> 'Положительно'
         ]
     ],
@@ -65,15 +65,15 @@ return  [
     // Отношение к курению
     'smoking' => [
         [
-            'code' 	=> 'negative',
+            'code' 	=> 'smoking_negative',
             'value'	=> 'Резко негативно'
         ],
         [
-            'code' 	=> 'neutral',
+            'code' 	=> 'smoking_neutral',
             'value'	=> 'Нет, но хотелось бы'
         ],
         [
-            'code' 	=> 'positive',
+            'code' 	=> 'smoking_positive',
             'value'	=> 'Положительно'
         ]
     ],

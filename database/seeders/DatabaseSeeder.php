@@ -31,10 +31,10 @@ class DatabaseSeeder extends Seeder
             CitiesSeeder::class,
         ]);
 
-        // if (env('APP_DEBUG')) {
-        //     $this->call([
-        //         TestDatabaseSeeder::class,
-        //     ]); 
-        // }
+        if (env('APP_DEBUG')) {
+            $this->call([
+                TestDatabaseSeeder::class,
+            ]); 
+        }
     }
 }

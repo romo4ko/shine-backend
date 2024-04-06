@@ -22,7 +22,7 @@ class FactoryServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Factory::guessFactoryNamesUsing(function (string $model_name) {
-            $namespace = 'Database\\Factories\\';
+            $namespace = '\\Database\\Factories\\';
             $model_name = Str::afterLast($model_name, '\\');
             return $namespace . $model_name . 'Factory';
         });

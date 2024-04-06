@@ -55,7 +55,7 @@ class User extends Authenticatable
                 'user_id' => $user->id,
                 'active' => true,
                 'status' => Property::getId('status.confirmation'),
-                'bot_settings' => Property::where('code', 'mixed')->first()->id
+                'bot_settings' => Property::where('code', 'mixed')->first('id')
             ]);
         });
     }

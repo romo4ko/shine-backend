@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Modules\Cities\Models\City;
 use Modules\Properties\Models\Property;
 use Modules\Users\Models\User;
@@ -26,30 +25,11 @@ class TestDatabaseSeeder extends Seeder
     public function createBaseUsers(): void
     {
 		$users = User::factory()->count(10)->make();
-        
-		foreach ($users as $user) {
-			UserSettings::create([
-				'user_id' => $user->id,
-				'text' => fake('ru')->text,
-				'birthdate' => fake()->date('d-m-Y'),
-				'sex' => $this->getRandomProperty('gender'),
-				'city' => $this->getRandomCity(),
-				'purpose' => $this->getRandomProperty('purpose'),
-				'fs' => $this->getRandomProperty('fs'),
-				'children' => $this->getRandomProperty('children'),
-				'smoking' => $this->getRandomProperty('smoking'),
-				'alcohol' => $this->getRandomProperty('alcohol'),
-				'education' => $this->getRandomProperty('education'),
-				'sign' => $this->getRandomProperty('zodiac'),
-				'height' => rand(150, 200),
-				'tags' => null
-			]);
-		}
 
 		foreach ($users as $user) {
 			UserProperties::create([
 				'user_id' => $user->id,
-				'text' => fake('ru')->text,
+				'text' => fake()->text,
 				'birthdate' => fake()->date('d-m-Y'),
 				'sex' => $this->getRandomProperty('gender'),
 				'city' => $this->getRandomCity(),
@@ -66,13 +46,13 @@ class TestDatabaseSeeder extends Seeder
 		}
     }
 
-	function getRandomProperty(string $property): ?Property
+	function getRandomProperty(string $property): ?int
 	{
-		return Property::where('type', $property)->inRandomOrder()->first()->id;
+		return Property::where('type', $property)->inRandomOrder()->first('id');
 	}
 
-	function getRandomCity(): ?City
+	function getRandomCity(): ?int
 	{
-		return City::inRandomOrder()->first()->id;
+		return City::inRandomOrder()->first('id');
 	}
 }
