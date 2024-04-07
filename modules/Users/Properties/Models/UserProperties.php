@@ -3,6 +3,7 @@
 namespace Modules\Users\Properties\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Modules\Properties\Models\Property;
 
 class UserProperties extends Model
 {
@@ -25,8 +26,8 @@ class UserProperties extends Model
         'tags',
     ];
 
-    // public function sex()
-    // {
-    //   return $this->hasOne(Property::class);
-    // }
+    public function property(string $name)
+    {
+      return $this->hasOne(Property::class);
+    }
 }

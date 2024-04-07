@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Database\Seeders;
@@ -23,43 +24,43 @@ class TestDatabaseSeeder extends Seeder
 
     public function createBaseUsers(): void
     {
-		$users = User::factory(User::class)->count(10)->create();
+        $users = User::factory(User::class)->count(10)->create();
 
-		foreach ($users as $user) {
-			UserProperties::create([
-				'user_id' => $user->id,
-				'text' => fake()->realText(),
-				'birthdate' => fake()->date(),
-				'sex' => $this->getRandomProperty('gender'),
-				'city' => $this->getRandomCity(),
-				'purpose' => $this->getRandomProperty('purpose'),
-				'fs' => $this->getRandomProperty('fs'),
-				'children' => $this->getRandomProperty('children'),
-				'smoking' => $this->getRandomProperty('smoking'),
-				'alcohol' => $this->getRandomProperty('alcohol'),
-				'education' => $this->getRandomProperty('education'),
-				'sign' => $this->getRandomProperty('zodiac'),
-				'height' => rand(150, 200),
-				'tags' => null
-			]);
-		}
+        foreach ($users as $user) {
+            UserProperties::create([
+                'user_id' => $user->id,
+                'text' => fake()->realText(),
+                'birthdate' => fake()->date(),
+                'sex' => $this->getRandomProperty('gender'),
+                'city' => $this->getRandomCity(),
+                'purpose' => $this->getRandomProperty('purpose'),
+                'fs' => $this->getRandomProperty('fs'),
+                'children' => $this->getRandomProperty('children'),
+                'smoking' => $this->getRandomProperty('smoking'),
+                'alcohol' => $this->getRandomProperty('alcohol'),
+                'education' => $this->getRandomProperty('education'),
+                'sign' => $this->getRandomProperty('zodiac'),
+                'height' => rand(150, 200),
+                'tags' => null
+            ]);
+        }
     }
 
-	function getRandomProperty(string $property): ?int
-	{
-		$property = Property::where('type', $property)->inRandomOrder()->first();
-		if ($property) {
-			return $property->id;
-		}
-		return null;
-	}
+    public function getRandomProperty(string $property): ?int
+    {
+        $property = Property::where('type', $property)->inRandomOrder()->first();
+        if ($property) {
+            return $property->id;
+        }
+        return null;
+    }
 
-	function getRandomCity(): ?int
-	{
-		$city = City::inRandomOrder()->first();
-		if ($city) {
-			return $city->id;
-		}
-		return null;
-	}
+    public function getRandomCity(): ?int
+    {
+        $city = City::inRandomOrder()->first();
+        if ($city) {
+            return $city->id;
+        }
+        return null;
+    }
 }

@@ -61,6 +61,6 @@ class User extends Authenticatable
 
     public function properties()
     {
-      return $this->hasOne(UserProperties::class);
+        return $this->hasOne(UserProperties::class);
     }
 }

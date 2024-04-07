@@ -1,6 +1,7 @@
 <?php
-declare(strict_types= 1);
- 
+
+declare(strict_types=1);
+
 namespace Modules\Users\Properties\Resources;
 
 use Carbon\Carbon;
@@ -19,20 +20,20 @@ class UserPropertiesResource extends JsonResource
     {
         return [
             'id' => $this->id,
-			'text' => $this->text,
-			'birthdate' => Carbon::parse($this->birthdate)->format('d.m.Y'),
-			'age' => Carbon::parse($this->birthdate)->age,
-			// 'sex' => 
-			// 'city',
-			// 'purpose',
-			// 'fs',
-			// 'children',
-			// 'smoking',
-			// 'alcohol',
-			// 'education',
-			// 'sign',
-			// 'height',
-			// 'tags',
+            'text' => $this->text,
+            'birthdate' => Carbon::parse($this->birthdate)->format('d.m.Y'),
+            'age' => Carbon::parse($this->birthdate)->age,
+            // 'sex' =>
+            // 'city',
+            // 'purpose',
+            // 'fs',
+            // 'children',
+            // 'smoking',
+            // 'alcohol',
+            // 'education',
+            // 'sign',
+            // 'height',
+            // 'tags',
         ];
     }
 }

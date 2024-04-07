@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Properties\Models;
@@ -20,9 +21,9 @@ class Property extends Model
         $typecode = explode('.', $typecode);
         $property = Property::where('type', $typecode[0])->where('code', $typecode[1])->first();
         if ($property) {
-			return $property->id;
-		}
-		return null;
+            return $property->id;
+        }
+        return null;
     }
 
 }

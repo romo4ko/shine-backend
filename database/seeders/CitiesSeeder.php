@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Database\Seeders;
@@ -24,12 +25,12 @@ class CitiesSeeder extends Seeder
         $cities = config("cities");
 
         DB::transaction(function () use ($cities) {
-			foreach ($cities as $city) {
-				City::updateOrCreate(
-					[
-						'name' => $city,
-					]
-				);
+            foreach ($cities as $city) {
+                City::updateOrCreate(
+                    [
+                        'name' => $city,
+                    ]
+                );
             }
         });
     }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Users\Controllers;
@@ -9,7 +10,6 @@ use Modules\Users\Resources\UserResource;
 use Carbon\Carbon;
 use Modules\Users\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Modules\Users\Properties\Models\UserProperties;
 
 class UserController extends Controller
@@ -36,13 +36,18 @@ class UserController extends Controller
 
         // TODO: Отправка письма для подтверждения
 
-        return ['id'=> $user->id];
+        return ['id' => $user->id];
     }
 
     public function getUserList()
     {
         $users = User::paginate(10);
-        return UserResource::collection($users);
+        return (new UserCollection($users))
+            ->additional([
+                'meta' => [
+                    'key' => 'value',
+                ]
+            ]);
     }
 
     public function getUserDetail(Request $request)
