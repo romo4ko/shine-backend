@@ -8,8 +8,6 @@ use Modules\Cities\Models\City;
 use Modules\Properties\Models\Property;
 use Modules\Users\Models\User;
 use Modules\Users\Models\UserProperties;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Hash;
 
 class TestDatabaseSeeder extends Seeder
 {

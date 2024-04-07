@@ -48,8 +48,6 @@ class User extends Authenticatable
 
     protected static function booted(): void
     {
-        // TODO: Отправика письма для подтверждения
-
         static::created(function (User $user) {
             UserSettings::create([
                 'user_id' => $user->id,

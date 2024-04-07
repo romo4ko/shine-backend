@@ -6,7 +6,6 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Modules\Cities\Models\City;
-use Modules\Properties\Models\Property;
 
 class CitiesSeeder extends Seeder
 {
