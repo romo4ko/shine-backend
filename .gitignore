@@ -21,3 +21,4 @@ yarn-error.log
 /public/mix-manifest.json
 /docker/mariadb/data
 /docker/redis/data
+/tools

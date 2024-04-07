@@ -19,8 +19,11 @@ class Property extends Model
     public static function getId(string $typecode): ?int
     {
         $typecode = explode('.', $typecode);
-        
-        return Property::select('id')->where('type', $typecode[0])->where('code', $typecode[1])->first('id');
+        $property = Property::where('type', $typecode[0])->where('code', $typecode[1])->first();
+        if ($property) {
+			return $property->id;
+		}
+		return null;
     }
 
 }

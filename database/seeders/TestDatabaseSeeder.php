@@ -8,7 +8,8 @@ use Modules\Cities\Models\City;
 use Modules\Properties\Models\Property;
 use Modules\Users\Models\User;
 use Modules\Users\Models\UserProperties;
-use Modules\Users\Models\UserSettings;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class TestDatabaseSeeder extends Seeder
 {
@@ -24,13 +25,13 @@ class TestDatabaseSeeder extends Seeder
 
     public function createBaseUsers(): void
     {
-		$users = User::factory()->count(10)->make();
+		$users = User::factory(User::class)->count(10)->create();
 
 		foreach ($users as $user) {
 			UserProperties::create([
 				'user_id' => $user->id,
-				'text' => fake()->text,
-				'birthdate' => fake()->date('d-m-Y'),
+				'text' => fake()->realText(),
+				'birthdate' => fake()->date(),
 				'sex' => $this->getRandomProperty('gender'),
 				'city' => $this->getRandomCity(),
 				'purpose' => $this->getRandomProperty('purpose'),
@@ -48,11 +49,19 @@ class TestDatabaseSeeder extends Seeder
 
 	function getRandomProperty(string $property): ?int
 	{
-		return Property::where('type', $property)->inRandomOrder()->first('id');
+		$property = Property::where('type', $property)->inRandomOrder()->first();
+		if ($property) {
+			return $property->id;
+		}
+		return null;
 	}
 
 	function getRandomCity(): ?int
 	{
-		return City::inRandomOrder()->first('id');
+		$city = City::inRandomOrder()->first();
+		if ($city) {
+			return $city->id;
+		}
+		return null;
 	}
 }

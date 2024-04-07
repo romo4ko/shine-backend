@@ -26,7 +26,7 @@ class PropertiesSeeder extends Seeder
         DB::transaction(function () use ($propertiesConfig) {
             foreach ($propertiesConfig as $type => $properties) {
                 foreach ($properties as $property) {
-                    $list = Property::updateOrCreate(
+                    Property::updateOrCreate(
                         [
                             'type' => $type,
                             'code' => $property['code'],
