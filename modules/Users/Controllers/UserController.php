@@ -4,17 +4,19 @@ declare(strict_types=1);
 namespace Modules\Users\Controllers;
 
 use App\Http\Controllers\Controller;
+use Modules\Users\Resources\UserCollection;
+use Modules\Users\Resources\UserResource;
 use Carbon\Carbon;
 use Modules\Users\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Modules\Users\Models\UserProperties;
+use Modules\Users\Properties\Models\UserProperties;
 
 class UserController extends Controller
 {
     public function register(Request $request): \Illuminate\Http\Response | array
     {
-        $credentials = $request->validate(
+        $request->validate(
             [
                 'email'     => ['required', 'email'],
                 'password'  => ['required'],
@@ -39,7 +41,8 @@ class UserController extends Controller
 
     public function getUserList()
     {
-        //
+        $users = User::paginate(10);
+        return UserResource::collection($users);
     }
 
     public function getUserDetail(Request $request)

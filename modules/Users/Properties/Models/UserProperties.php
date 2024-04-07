@@ -1,8 +1,7 @@
 <?php
 
-namespace Modules\Users\Models;
+namespace Modules\Users\Properties\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class UserProperties extends Model
@@ -26,4 +25,8 @@ class UserProperties extends Model
         'tags',
     ];
 
+    // public function sex()
+    // {
+    //   return $this->hasOne(Property::class);
+    // }
 }

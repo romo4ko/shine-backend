@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\Properties\Models\Property;
+use Modules\Users\Properties\Models\UserProperties;
 
 class User extends Authenticatable
 {
@@ -56,5 +57,10 @@ class User extends Authenticatable
                 'bot_settings' => Property::getId('prediction_types.mixed')
             ]);
         });
+    }
+
+    public function properties()
+    {
+      return $this->hasOne(UserProperties::class);
     }
 }

@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use Modules\Cities\Models\City;
 use Modules\Properties\Models\Property;
 use Modules\Users\Models\User;
-use Modules\Users\Models\UserProperties;
+use Modules\Users\Properties\Models\UserProperties;
 
 class TestDatabaseSeeder extends Seeder
 {
