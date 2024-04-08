@@ -25,9 +25,4 @@ class UserProperties extends Model
         'height',
         'tags',
     ];
-
-    public function property(string $name)
-    {
-      return $this->hasOne(Property::class);
-    }
 }
