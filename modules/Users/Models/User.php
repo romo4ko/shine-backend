@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\Properties\Models\Property;
+use Modules\Users\Images\Models\UserImage;
 use Modules\Users\Properties\Models\UserProperties;
 
 class User extends Authenticatable
@@ -54,7 +55,7 @@ class User extends Authenticatable
                 'user_id' => $user->id,
                 'active' => true,
                 'status' => Property::getId('user_statuses.confirmation'),
-                'bot_settings' => Property::getId('prediction_types.mixed')
+                'bot_settings' => Property::getId('prediction_types.mixed'),
             ]);
         });
     }
@@ -62,5 +63,10 @@ class User extends Authenticatable
     public function properties()
     {
         return $this->hasOne(UserProperties::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(UserImage::class);
     }
 }

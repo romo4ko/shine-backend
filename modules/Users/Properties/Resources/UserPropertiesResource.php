@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Modules\Cities\Models\City;
 use Modules\Properties\Models\Property;
-use Modules\Users\Properties\Models\UserProperties;
 
 class UserPropertiesResource extends JsonResource
 {
