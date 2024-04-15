@@ -47,4 +47,6 @@ class UserPropertiesResource extends JsonResource
 	{
 		return City::where('id', $id)->first();
 	}
+
+
 }

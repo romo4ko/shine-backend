@@ -15,9 +15,10 @@ class UserImageResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $url = env('APP_URL');
         return [
             'id' => $this->id,
-            'path' => $this->path,
+            'path' => $url . $this->path,
             'sorting' => $this->sorting,
         ];
     }

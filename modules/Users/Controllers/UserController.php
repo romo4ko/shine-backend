@@ -65,11 +65,6 @@ class UserController extends Controller
         //
     }
 
-    public function storeUserProperties(Request $request, User $user)
-    {
-        //
-    }
-
     public function updateUserSetting(Request $request, User $user)
     {
         //
