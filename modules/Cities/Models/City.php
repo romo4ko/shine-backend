@@ -17,4 +17,12 @@ class City extends Model
         'data',
     ];
 
+    public function getIdByName(string $name)
+    {
+        $city = City::where('name', $name)->first();
+        if ($city) {
+            return $city->id;
+        }
+        return null;
+    }
 }

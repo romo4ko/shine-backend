@@ -24,4 +24,8 @@ class UserProperties extends Model
         'height',
         'tags',
     ];
+
+    protected $casts = [
+        'birthdate' => 'date:d.m.Y',
+    ];
 }

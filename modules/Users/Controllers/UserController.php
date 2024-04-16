@@ -39,7 +39,7 @@ class UserController extends Controller
         return ['id' => $user->id];
     }
 
-    public function getUserList()
+    public function getUserList(): UserCollection
     {
         $users = User::paginate(10);
         return (new UserCollection($users))
@@ -50,7 +50,7 @@ class UserController extends Controller
             ]);
     }
 
-    public function getUserDetail(Request $request)
+    public function getUserDetail(Request $request, User $user)
     {
         //
     }
