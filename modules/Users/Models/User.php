@@ -54,8 +54,8 @@ class User extends Authenticatable
             UserSettings::create([
                 'user_id' => $user->id,
                 'active' => true,
-                'status' => Property::getId('user_statuses.confirmation'),
-                'bot_settings' => Property::getId('prediction_types.mixed'),
+                'status' => Property::getId('user_statuses', 'confirmation'),
+                'bot_settings' => Property::getId('prediction_types', 'mixed'),
             ]);
         });
     }

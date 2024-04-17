@@ -20,7 +20,8 @@ Route::group(['prefix' => 'api'], function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::group(['prefix' => 'users'], function () {
             Route::get('/list', [UserController::class, 'getUserList'])->name('users.list');
-            Route::post('/storeUserProperties', [UserPropertiesController::class, 'storeUserProperties'])->name('users.list');
+            Route::post('/storeUserProperties', [UserPropertiesController::class, 'storeUserProperties'])->name('users.store');
+            Route::post('/updateUserProperties', [UserPropertiesController::class, 'updateUserProperties'])->name('users.update');
         });
     });
 });

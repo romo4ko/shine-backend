@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Users\Controllers;
 
 use App\Http\Controllers\Controller;
+use Modules\Users\Properties\UserPropertiesController;
 use Modules\Users\Resources\UserCollection;
 use Modules\Users\Resources\UserResource;
 use Carbon\Carbon;
@@ -56,11 +57,6 @@ class UserController extends Controller
     }
 
     public function getCurrentUser(User $user)
-    {
-        //
-    }
-
-    public function updateUserProperty(Request $request, User $user)
     {
         //
     }
