@@ -51,11 +51,15 @@ class User extends Authenticatable
     protected static function booted(): void
     {
         static::created(function (User $user) {
-            UserSettings::create([
+            $property = new Property();
+            UserSettings::query()->create([
                 'user_id' => $user->id,
                 'active' => true,
-                'status' => Property::getId('user_statuses', 'confirmation'),
-                'bot_settings' => Property::getId('prediction_types', 'mixed'),
+                'status' => $property->getId('user_statuses', 'confirmation'),
+                'bot_settings' => $property->getId('prediction_types', 'mixed'),
+            ]);
+            UserProperties::query()->create([
+                'user_id' => $user->id,
             ]);
         });
     }

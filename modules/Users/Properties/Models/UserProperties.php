@@ -10,6 +10,7 @@ class UserProperties extends Model
     public $timestamps = true;
 
     protected $fillable = [
+        'user_id',
         'text',
         'birthdate',
         'sex',
