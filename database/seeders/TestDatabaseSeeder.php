@@ -34,8 +34,7 @@ class TestDatabaseSeeder extends Seeder
                 'path' => $images[array_rand($images)],
             ]);
 
-            UserProperties::create([
-                'user_id' => $user->id,
+            $user->properties->update([
                 'text' => fake()->realText(),
                 'birthdate' => fake()->date(),
                 'sex' => $this->getRandomProperty('gender'),

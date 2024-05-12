@@ -38,15 +38,13 @@ class UserPropertiesResource extends JsonResource
         ];
     }
 
-    public function getProperty(int $id): Property
+    public function getProperty(?int $id): ?Property
     {
         return Property::where('id', $id)->first();
     }
 
-    public function getCity(int $id): City
+    public function getCity(?int $id): ?City
     {
         return City::where('id', $id)->first();
     }
-
-
 }

@@ -63,6 +63,7 @@ class UserPropertiesController
         $relatedProperties = [
             'sex',
             'fs',
+            'purpose',
             'children',
             'smoking',
             'alcohol',
