@@ -21,19 +21,20 @@ class UserPropertiesController
         $this->user = Auth::user();
     }
 
+    // For the first time during user registration
     public function storeUserProperties(Request $request, Property $property, City $city): array
     {
         $request->validate(
             [
-                'sex'       =>  ['required'],
-                'birthdate' =>  ['required'],
-                'city'      =>  ['required'],
-                'fs'        =>  ['required'],
-                'children'  =>  ['required'],
-                'smoking'   =>  ['required'],
-                'alcohol'   =>  ['required'],
-                'text'      =>  ['required'],
-                'tags'      =>  ['required'],
+                'gender'       =>  ['required'],
+                'name'       =>  ['required'],
+//                'city'      =>  ['required'],
+//                'fs'        =>  ['required'],
+//                'children'  =>  ['required'],
+//                'smoking'   =>  ['required'],
+//                'alcohol'   =>  ['required'],
+//                'text'      =>  ['required'],
+//                'tags'      =>  ['required'],
             ]
         );
 
@@ -42,7 +43,7 @@ class UserPropertiesController
         ]);
         UserProperties::where('user_id', $this->user->id)
             ->update([
-                'sex' => $property->getId('sex', $request['sex']),
+                'sex' => $property->getId('gender', $request['gender']),
                 'birthdate' => Carbon::parse($request['birthdate']),
                 'city' => $city->getIdByName($request['city']),
                 'fs' => $property->getId('fs', $request['fs']),

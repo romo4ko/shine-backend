@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Modules\Auth\Controllers\AuthController;
 use Modules\Users\Controllers\UserController;
+use Modules\Users\Images\Controllers\UserImageController;
 use Modules\Users\Properties\UserPropertiesController;
 
 /*
@@ -22,7 +23,6 @@ use Modules\Users\Properties\UserPropertiesController;
 Route::group(['prefix' => 'auth'], function () {
     Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
     Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
-    Route::get('/checkAuth', [AuthController::class, 'getCurrentAuth'])->name('auth.currentAuth');
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
 
@@ -32,5 +32,11 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::get('/list', [UserController::class, 'getUserList'])->name('users.list');
         Route::post('/storeProperties', [UserPropertiesController::class, 'storeUserProperties'])->name('users.store');
         Route::post('/updateProperties', [UserPropertiesController::class, 'updateUserProperties'])->name('users.update');
+
+        Route::group(['prefix' => 'images'], function () {
+            Route::post('/store', [UserImageController::class, 'store'])->name('image.store');
+        });
     });
+
+
 });
