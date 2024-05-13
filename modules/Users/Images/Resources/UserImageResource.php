@@ -18,7 +18,7 @@ class UserImageResource extends JsonResource
         $url = env('APP_URL');
         return [
             'id' => $this->id,
-            'path' => $url . $this->path,
+            'path' => $url . '/storage' . $this->path,
             'sorting' => $this->sorting,
         ];
     }

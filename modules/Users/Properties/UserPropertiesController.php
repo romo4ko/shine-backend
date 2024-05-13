@@ -43,7 +43,7 @@ class UserPropertiesController
         ]);
         UserProperties::where('user_id', $this->user->id)
             ->update([
-                'sex' => $property->getId('gender', $request['gender']),
+                'gender' => $property->getId('gender', $request['gender']),
                 'birthdate' => Carbon::parse($request['birthdate']),
                 'city' => $city->getIdByName($request['city']),
                 'fs' => $property->getId('fs', $request['fs']),
@@ -62,7 +62,7 @@ class UserPropertiesController
     public function updateUserProperties(Request $request, Property $property, City $city): array
     {
         $relatedProperties = [
-            'sex',
+            'gender',
             'fs',
             'purpose',
             'children',

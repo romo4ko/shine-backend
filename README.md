@@ -21,15 +21,15 @@ php artisan key:generate
 ```bash
 php artisan migrate
 ```
-
 ```bash
-php artisan db:seed
+php artisan db:seed DatabaseSeeder
 ```
-
+```bash
+php artisan storage:link
+```
 ```bash
 npm install
 ```
-
 ```bash
 npm run build
 ```

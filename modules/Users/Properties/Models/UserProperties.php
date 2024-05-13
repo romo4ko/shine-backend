@@ -13,7 +13,7 @@ class UserProperties extends Model
         'user_id',
         'text',
         'birthdate',
-        'sex',
+        'gender',
         'city',
         'purpose',
         'fs',

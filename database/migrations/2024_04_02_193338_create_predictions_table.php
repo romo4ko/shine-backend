@@ -15,7 +15,7 @@ return new class () extends Migration {
         Schema::create('predictions', function (Blueprint $table) {
             $table->id();
             $table->text('text');
-            $table->foreignId('sex')->nullable()->constrained('properties');
+            $table->foreignId('gender')->nullable()->constrained('properties');
             $table->foreignId('sign')->nullable()->constrained('properties');
             $table->json('extended')->nullable();
         });

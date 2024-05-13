@@ -16,7 +16,7 @@ return new class () extends Migration {
 
             $table->text('text')->nullable();
             $table->date('birthdate')->nullable();
-            $table->foreignId('sex')->nullable()->constrained('properties');
+            $table->foreignId('gender')->nullable()->constrained('properties');
             $table->foreignId('city')->nullable()->constrained('cities');
 
             $table->foreignId('purpose')->nullable()->constrained('properties')->comment('Цель знакомства');

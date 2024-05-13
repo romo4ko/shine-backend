@@ -74,4 +74,13 @@ class AuthController extends Controller
             'success' => true
         ]);
     }
+
+    public function check(): \Illuminate\Http\Response | array
+    {
+        $user = Auth::guard('sanctum')->user();
+
+        return response([
+            'user' => $user
+        ]);
+    }
 }
