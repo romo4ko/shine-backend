@@ -21,13 +21,12 @@ class UserResource extends JsonResource
         if (!is_null($this->properties)) {
             $properties = new UserPropertiesResource($this->properties);
         } else {
-            $properties = null;
+            $properties = [];
         }
-
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'properties' => $properties,
+            ...$properties->resolve(),
             'images' => UserImageResource::collection($this->images)
         ];
     }

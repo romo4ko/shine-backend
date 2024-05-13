@@ -18,6 +18,10 @@ return new class () extends Migration {
             $table->foreignId('status')->nullable()->constrained('properties');
             $table->foreignId('bot_settings')->nullable()->constrained('properties');
 
+            $table->integer('page')->default(1);
+            $table->json('filter')->nullable();
+            $table->json('pagination')->nullable();
+
             $table->json('extended')->nullable();
 
             $table->timestamps();

@@ -26,11 +26,12 @@ class TestDatabaseSeeder extends Seeder
     public function createBaseUsers(): void
     {
         $users = User::factory(User::class)->count(10)->create();
-        $images = ["/storage/images/stubs/man.jpg", "/storage/images/stubs/woman.jpg"];
+        $images = ["/images/stubs/man.jpg", "/images/stubs/woman.jpg"];
 
         foreach ($users as $user) {
             UserImage::create([
                 'user_id' => $user->id,
+                'sorting' => 1,
                 'path' => $images[array_rand($images)],
             ]);
 

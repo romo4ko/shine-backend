@@ -30,7 +30,7 @@ Route::group(['prefix' => 'auth'], function () {
 // For authorized users
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::group(['prefix' => 'users'], function () {
-        Route::get('/list', [UserController::class, 'getUserList'])->name('users.list');
+        Route::get('/list', [UserController::class, 'getUsersList'])->name('users.list');
         Route::post('/storeProperties', [UserPropertiesController::class, 'storeUserProperties'])->name('users.store');
         Route::post('/updateProperties', [UserPropertiesController::class, 'updateUserProperties'])->name('users.update');
 

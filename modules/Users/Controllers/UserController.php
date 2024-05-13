@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Modules\Users\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
 use Modules\Users\Properties\UserPropertiesController;
 use Modules\Users\Resources\UserCollection;
-use Modules\Users\Resources\UserResource;
 use Carbon\Carbon;
 use Modules\Users\Models\User;
 use Illuminate\Http\Request;
@@ -15,34 +16,27 @@ use Modules\Users\Properties\Models\UserProperties;
 
 class UserController extends Controller
 {
-    public function register(Request $request): \Illuminate\Http\Response | array
+    public function getUsersList(Request $request): UserCollection
     {
-        $request->validate(
-            [
-                'email'     => ['required', 'email'],
-                'password'  => ['required'],
-                'birthdate' => ['required']
-            ]
-        );
+        $user = Auth::user();
 
-        $user = User::create([
-            'email'     => $request->email,
-            'password'  => $request->password,
-        ]);
+        $count = config('settings.pagination.count');
+        $page = $user->settings->page;
+        Paginator::currentPageResolver(function () use ($page) {
+            return $page;
+        });
 
-        UserProperties::create([
-            'user_id' => $user->id,
-            'birthdate' => Carbon::parse($request->birthdate)->format('Y-m-d')
-        ]);
+        $users = User::where('email', '!=', 'admin@admin.ru')->paginate($count);
 
-        // TODO: Отправка письма для подтверждения
+        $lastPage = $users->lastPage();
+        if ($page < $lastPage) {
+            $user->settings->increment('page', 1);
+        } else {
+            $user->settings->update([
+                'page' => 1
+            ]);
+        }
 
-        return ['id' => $user->id];
-    }
-
-    public function getUserList(): UserCollection
-    {
-        $users = User::paginate(10);
         return (new UserCollection($users))
             ->additional([
                 'meta' => [

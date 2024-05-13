@@ -57,6 +57,8 @@ class AuthController extends Controller
             'birthdate' => Carbon::parse($request->birtdate),
         ]);
 
+        // TODO: Отправка письма для подтверждения
+
         return response([
             'user' => $user,
             'token' => $user->createToken('main')->plainTextToken

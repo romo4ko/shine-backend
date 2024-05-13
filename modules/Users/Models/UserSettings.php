@@ -14,6 +14,16 @@ class UserSettings extends Model
         'active',
         'status',
         'bot_settings',
+        'page',
+        'filter',
+        'pagination',
+        'extended',
+    ];
+
+    protected $casts = [
+        'filter' => 'array',
+        'pagination' => 'array',
+        'extended' => 'array',
     ];
 
 }
