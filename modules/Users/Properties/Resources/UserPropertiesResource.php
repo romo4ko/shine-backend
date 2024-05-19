@@ -21,6 +21,7 @@ class UserPropertiesResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'name' => $this->name,
             'text' => $this->text,
             'birthdate' => Carbon::parse($this->birthdate)->format('d.m.Y'),
             'age' => Carbon::parse($this->birthdate)->age,

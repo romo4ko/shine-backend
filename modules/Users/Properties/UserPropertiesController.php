@@ -38,11 +38,9 @@ class UserPropertiesController
             ]
         );
 
-        $this->user->update([
-            'name' => $request['name'],
-        ]);
         UserProperties::where('user_id', $this->user->id)
             ->update([
+                'name' => $request['name'],
                 'gender' => $property->getId('gender', $request['gender']),
                 'birthdate' => Carbon::parse($request['birthdate']),
                 'city' => $city->getIdByName($request['city']),
@@ -68,6 +66,7 @@ class UserPropertiesController
             'children',
             'smoking',
             'alcohol',
+            'name'
         ];
         if ($request->hasAny($relatedProperties)) {
             foreach ($request->only($relatedProperties) as $type => $code) {

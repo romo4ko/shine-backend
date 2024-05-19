@@ -36,6 +36,7 @@ class TestDatabaseSeeder extends Seeder
             ]);
 
             $user->properties->update([
+                'name'     => fake()->firstName(),
                 'text' => fake()->realText(),
                 'birthdate' => fake()->date(),
                 'gender' => $this->getRandomProperty('gender'),

@@ -15,7 +15,6 @@ return new class () extends Migration {
             $table->string('name');
             $table->string('lonlat')->nullable();
             $table->json('data')->nullable();
-            $table->timestamps();
         });
     }
 

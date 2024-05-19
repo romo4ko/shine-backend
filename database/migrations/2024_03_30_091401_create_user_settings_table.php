@@ -13,7 +13,7 @@ return new class () extends Migration {
         Schema::create('user_settings', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->boolean('active')->default(true);
             $table->foreignId('status')->nullable()->constrained('properties');
             $table->foreignId('bot_settings')->nullable()->constrained('properties');
