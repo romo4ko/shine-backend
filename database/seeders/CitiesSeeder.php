@@ -28,7 +28,11 @@ class CitiesSeeder extends Seeder
             foreach ($cities as $city) {
                 City::updateOrCreate(
                     [
-                        'name' => $city,
+                        'name' => $city['name'],
+                        'region' => $city['region'],
+                        'district' => $city['district'],
+                        'lon' => $city['lon'],
+                        'lat' => $city['lat'],
                     ]
                 );
             }

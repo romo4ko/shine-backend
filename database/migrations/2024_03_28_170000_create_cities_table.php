@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,8 +15,10 @@ return new class () extends Migration {
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('lonlat')->nullable();
-            $table->json('data')->nullable();
+            $table->string('region')->nullable();
+            $table->string('district')->nullable();
+            $table->string('lon')->nullable();
+            $table->string('lat')->nullable();
         });
     }
 
@@ -23,6 +27,10 @@ return new class () extends Migration {
      */
     public function down(): void
     {
+//        Schema::table('user_properties', function (Blueprint $table) {
+//            $table->dropForeign(['city']);
+//        });
+
         Schema::dropIfExists('cities');
     }
 };
