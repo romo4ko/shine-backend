@@ -17,6 +17,7 @@ return new class () extends Migration {
             $table->text('text');
             $table->foreignId('gender')->nullable()->constrained('properties');
             $table->foreignId('sign')->nullable()->constrained('properties');
+            $table->foreignId('type')->nullable()->constrained('properties');
             $table->json('extended')->nullable();
         });
     }
