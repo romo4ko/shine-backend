@@ -2,7 +2,6 @@
 
 namespace Modules\Users\Images\Controllers;
 
-
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,14 +30,16 @@ class UserImageController
         $path = '/images/' . $this->user->id . '/' . $fileNewName;
         $image->storeAs('/images/' . $this->user->id, $fileNewName, 'public');
 
-        $this->user->images()->updateOrInsert([
+        $this->user->images()->updateOrInsert(
+            [
               'user_id' => $this->user->id,
               'sorting' => $request->sorting
         ],
-        [
+            [
               'path' => $path,
-        ]);
-        
+        ]
+        );
+
         $saved = $this->user
             ->images()
             ->where('sorting', $request->sorting)

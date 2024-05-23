@@ -58,4 +58,3 @@ class User extends Authenticatable
         return $this->hasMany(UserImage::class);
     }
 }
-
