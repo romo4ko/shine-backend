@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Users\Properties;
 
+use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,7 @@ use Modules\Properties\Models\Property;
 use Modules\Users\Models\User;
 use Modules\Users\Properties\Models\UserProperties;
 
-class UserPropertiesController
+class UserPropertiesController extends Controller
 {
     private User $user;
 

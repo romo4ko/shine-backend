@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Modules\Auth\Controllers\AuthController;
+use Modules\Likes\LikeController;
 use Modules\Users\Controllers\UserController;
 use Modules\Users\Images\Controllers\UserImageController;
 use Modules\Users\Properties\UserPropertiesController;
@@ -37,6 +38,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::group(['prefix' => 'images'], function () {
             Route::post('/store', [UserImageController::class, 'store'])->name('image.store');
         });
+
+        Route::post('/like', [LikeController::class, 'like'])->name('users.store');
     });
 
 
