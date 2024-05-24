@@ -10,6 +10,6 @@ class Like extends Model
 
     protected $fillable = [
         'who',
-        'whom'
+        'whom',
     ];
 }

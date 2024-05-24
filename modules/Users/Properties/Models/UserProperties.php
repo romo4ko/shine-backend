@@ -3,7 +3,6 @@
 namespace Modules\Users\Properties\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Modules\Properties\Models\Property;
 
 class UserProperties extends Model
 {

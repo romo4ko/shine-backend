@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Modules\Auth\Controllers\AuthController;
 use Modules\Likes\LikeController;
@@ -41,6 +40,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
         Route::post('/like', [LikeController::class, 'like'])->name('users.store');
     });
-
 
 });

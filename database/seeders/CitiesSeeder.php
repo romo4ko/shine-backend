@@ -12,8 +12,6 @@ class CitiesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run(): void
     {
@@ -22,7 +20,7 @@ class CitiesSeeder extends Seeder
 
     public function createBaseCities(): void
     {
-        $cities = config("cities");
+        $cities = config('cities');
 
         DB::transaction(function () use ($cities) {
             foreach ($cities as $city) {

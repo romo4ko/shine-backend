@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use Database\Seeders\TestDatabaseSeeder;
-use Modules\Users\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Modules\Users\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,7 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         User::query()->create(
             [
-                'email'    => 'admin@admin.ru',
+                'email' => 'admin@admin.ru',
                 'password' => Hash::make('password'),
             ]
         );

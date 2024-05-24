@@ -9,14 +9,11 @@ use Modules\Cities\Models\City;
 use Modules\Properties\Models\Property;
 use Modules\Users\Images\Models\UserImage;
 use Modules\Users\Models\User;
-use Modules\Users\Properties\Models\UserProperties;
 
 class TestDatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run(): void
     {
@@ -26,7 +23,7 @@ class TestDatabaseSeeder extends Seeder
     public function createBaseUsers(): void
     {
         $users = User::factory(User::class)->count(10)->create();
-        $images = ["/images/stubs/man.jpg", "/images/stubs/woman.jpg"];
+        $images = ['/images/stubs/man.jpg', '/images/stubs/woman.jpg'];
 
         foreach ($users as $user) {
             UserImage::create([
@@ -36,7 +33,7 @@ class TestDatabaseSeeder extends Seeder
             ]);
 
             $user->properties->update([
-                'name'     => fake()->firstName(),
+                'name' => fake()->firstName(),
                 'text' => fake()->realText(),
                 'birthdate' => fake()->date(),
                 'gender' => $this->getRandomProperty('gender'),
@@ -49,7 +46,7 @@ class TestDatabaseSeeder extends Seeder
                 'education' => $this->getRandomProperty('education'),
                 'sign' => $this->getRandomProperty('zodiac'),
                 'height' => rand(150, 200),
-                'tags' => null
+                'tags' => null,
             ]);
         }
     }
@@ -60,6 +57,7 @@ class TestDatabaseSeeder extends Seeder
         if ($property) {
             return $property->id;
         }
+
         return null;
     }
 
@@ -69,6 +67,7 @@ class TestDatabaseSeeder extends Seeder
         if ($city) {
             return $city->id;
         }
+
         return null;
     }
 }

@@ -18,16 +18,17 @@ class UserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        if (!is_null($this->properties)) {
+        if (! is_null($this->properties)) {
             $properties = new UserPropertiesResource($this->properties);
         } else {
             $properties = [];
         }
+
         return [
             'id' => $this->id,
             'name' => $this->name,
             ...$properties->resolve(),
-            'images' => UserImageResource::collection($this->images)
+            'images' => UserImageResource::collection($this->images),
         ];
     }
 }

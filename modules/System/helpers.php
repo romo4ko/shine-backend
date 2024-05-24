@@ -5,8 +5,8 @@ declare(strict_types=1);
 /**
  * Обёртка над функцией print_r
  *
- * @param mixed $var
- * @param bool $in_file
+ * @param  mixed  $var
+ * @param  bool  $in_file
  */
 function d($var = false, $in_file = false)
 {

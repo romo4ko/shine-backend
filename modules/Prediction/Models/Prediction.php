@@ -15,6 +15,6 @@ class Prediction extends Model
         'gender',
         'sign',
         'type',
-        'extended'
+        'extended',
     ];
 }

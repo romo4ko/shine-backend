@@ -23,20 +23,21 @@ class LikeController extends Controller
     public function like(Request $request, Like $like): array|Response
     {
         $recipocity = Like::where([
-            'who'   => $request->whom,
-            'whom'  => $this->user->id
+            'who' => $request->whom,
+            'whom' => $this->user->id,
         ])->first();
 
         Like::create([
-            'who'   => $this->user->id,
-            'whom'  => $request->whom
+            'who' => $this->user->id,
+            'whom' => $request->whom,
         ]);
 
         if ($recipocity != null) {
             Chat::create([
-                 'initiator'   => $this->user->id,
-                 'companion'  => $request->whom
+                'initiator' => $this->user->id,
+                'companion' => $request->whom,
             ]);
+
             return response(['status' => 'match']);
         }
 

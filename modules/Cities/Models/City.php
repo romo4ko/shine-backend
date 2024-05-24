@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\Cities\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class City extends Model
@@ -23,6 +22,7 @@ class City extends Model
         if ($city) {
             return $city->id;
         }
+
         return null;
     }
 }

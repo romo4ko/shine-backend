@@ -5,14 +5,11 @@ declare(strict_types=1);
 namespace Modules\Users\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
-use Modules\Users\Properties\UserPropertiesController;
-use Modules\Users\Resources\UserCollection;
-use Carbon\Carbon;
 use Modules\Users\Models\User;
-use Illuminate\Http\Request;
-use Modules\Users\Properties\Models\UserProperties;
+use Modules\Users\Resources\UserCollection;
 
 class UserController extends Controller
 {
@@ -33,7 +30,7 @@ class UserController extends Controller
             $user->settings->increment('page', 1);
         } else {
             $user->settings->update([
-                'page' => 1
+                'page' => 1,
             ]);
         }
 
@@ -41,7 +38,7 @@ class UserController extends Controller
             ->additional([
                 'meta' => [
                     'key' => 'value',
-                ]
+                ],
             ]);
     }
 

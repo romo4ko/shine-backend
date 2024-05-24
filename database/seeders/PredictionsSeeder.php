@@ -20,7 +20,7 @@ class PredictionsSeeder extends Seeder
 
     public function createBasePredictions(): void
     {
-        $predictionsConfig = config("predictions");
+        $predictionsConfig = config('predictions');
 
         DB::transaction(function () use ($predictionsConfig) {
             foreach ($predictionsConfig as $predictions) {

@@ -1,6 +1,6 @@
 <?php
 
-return  [
+return [
 
     // Pagination
     'pagination' => [
@@ -11,19 +11,19 @@ return  [
     'users' => [
         'pagination' => [
             'page' => 1,
-            'active' => null
+            'active' => null,
         ],
         'filter' => [
             'gender' => null,
             'age' => [
                 'from' => 18,
-                'to'   => 40
+                'to' => 40,
             ],
             'destination' => [
                 'from' => 1,
-                'to'   => 100
-            ]
-        ]
-    ]
+                'to' => 100,
+            ],
+        ],
+    ],
 
 ];

@@ -35,26 +35,28 @@ class UserPropertiesResource extends JsonResource
             'education' => $this->getProperty($this->education),
             'sign' => $this->getProperty($this->sign),
             'height' => $this->height,
-            'tags' => $this->tags
+            'tags' => $this->tags,
         ];
     }
 
-    public function getProperty(?int $id): ?String
+    public function getProperty(?int $id): ?string
     {
         $property = Property::where('id', $id)->first();
         if ($property) {
             return $property->name;
         }
+
         return null;
     }
 
-    public function getCity(?int $id): ?String
+    public function getCity(?int $id): ?string
     {
         $city = City::where('id', $id)->first();
 
         if ($city) {
             return $city->name;
         }
+
         return null;
     }
 }

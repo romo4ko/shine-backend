@@ -27,15 +27,15 @@ class UserPropertiesController extends Controller
     {
         $request->validate(
             [
-                'gender'       =>  ['required'],
-                'name'       =>  ['required'],
-//                'city'      =>  ['required'],
-//                'fs'        =>  ['required'],
-//                'children'  =>  ['required'],
-//                'smoking'   =>  ['required'],
-//                'alcohol'   =>  ['required'],
-//                'text'      =>  ['required'],
-//                'tags'      =>  ['required'],
+                'gender' => ['required'],
+                'name' => ['required'],
+                //                'city'      =>  ['required'],
+                //                'fs'        =>  ['required'],
+                //                'children'  =>  ['required'],
+                //                'smoking'   =>  ['required'],
+                //                'alcohol'   =>  ['required'],
+                //                'text'      =>  ['required'],
+                //                'tags'      =>  ['required'],
             ]
         );
 
@@ -50,7 +50,7 @@ class UserPropertiesController extends Controller
                 'smoking' => $property->getId('smoking', $request['smoking']),
                 'alcohol' => $property->getId('alcohol', $request['alcohol']),
                 'text' => $request['text'],
-        ]);
+            ]);
         // Tags
 
         return [
@@ -67,13 +67,13 @@ class UserPropertiesController extends Controller
             'children',
             'smoking',
             'alcohol',
-            'name'
+            'name',
         ];
         if ($request->hasAny($relatedProperties)) {
             foreach ($request->only($relatedProperties) as $type => $code) {
                 UserProperties::where('user_id', $this->user->id)
                     ->update([
-                         $type => $property->getId($type, $code),
+                        $type => $property->getId($type, $code),
                     ]);
             }
         }

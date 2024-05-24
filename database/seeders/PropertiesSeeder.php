@@ -12,8 +12,6 @@ class PropertiesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run(): void
     {
@@ -22,7 +20,7 @@ class PropertiesSeeder extends Seeder
 
     public function createBaseProperties(): void
     {
-        $propertiesConfig = config("properties");
+        $propertiesConfig = config('properties');
 
         DB::transaction(function () use ($propertiesConfig) {
             foreach ($propertiesConfig as $type => $properties) {

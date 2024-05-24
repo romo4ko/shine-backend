@@ -22,6 +22,7 @@ class Property extends Model
         if ($property) {
             return $property->id;
         }
+
         return null;
     }
 }

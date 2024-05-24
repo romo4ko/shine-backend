@@ -9,18 +9,15 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Validation\ValidationException;
 use Modules\Users\Models\User;
-use Modules\Users\Properties\Models\UserProperties;
 
 class AuthController extends Controller
 {
-    public function login(Request $request): \Illuminate\Http\Response | array
+    public function login(Request $request): \Illuminate\Http\Response|array
     {
         $request->validate(
             [
-                'email'    => ['required', 'email'],
+                'email' => ['required', 'email'],
                 'password' => ['required'],
             ]
         );
@@ -35,21 +32,21 @@ class AuthController extends Controller
 
         return response([
             'user' => $user,
-            'token' => $user->createToken('main')->plainTextToken
+            'token' => $user->createToken('main')->plainTextToken,
         ]);
     }
 
-    public function register(Request $request): \Illuminate\Http\Response | array
+    public function register(Request $request): \Illuminate\Http\Response|array
     {
         $request->validate(
             [
-                'email'    => ['required', 'email'],
+                'email' => ['required', 'email'],
                 'password' => ['required'],
             ]
         );
 
         $user = User::create([
-            'email'    => $request->email,
+            'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
@@ -61,11 +58,11 @@ class AuthController extends Controller
 
         return response([
             'user' => $user,
-            'token' => $user->createToken('main')->plainTextToken
+            'token' => $user->createToken('main')->plainTextToken,
         ]);
     }
 
-    public function logout(): \Illuminate\Http\Response | array
+    public function logout(): \Illuminate\Http\Response|array
     {
         $user = Auth::guard('sanctum')->user();
         if ($user) {
@@ -73,16 +70,16 @@ class AuthController extends Controller
         }
 
         return response([
-            'success' => true
+            'success' => true,
         ]);
     }
 
-    public function check(): \Illuminate\Http\Response | array
+    public function check(): \Illuminate\Http\Response|array
     {
         $user = Auth::guard('sanctum')->user();
 
         return response([
-            'user' => $user
+            'user' => $user,
         ]);
     }
 }
