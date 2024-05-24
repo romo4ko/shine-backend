@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
 use Modules\Auth\Controllers\AuthController;
+use Modules\Chats\Controllers\ChatController;
 use Modules\Likes\LikeController;
 use Modules\Users\Controllers\UserController;
 use Modules\Users\Images\Controllers\UserImageController;
@@ -37,8 +38,14 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::group(['prefix' => 'images'], function () {
             Route::post('/store', [UserImageController::class, 'store'])->name('image.store');
         });
+    });
 
-        Route::post('/like', [LikeController::class, 'like'])->name('users.store');
+    Route::group(['prefix' => 'likes'], function () {
+        Route::post('/set', [LikeController::class, 'like'])->name('likes.set');
+    });
+
+    Route::group(['prefix' => 'chats'], function () {
+        Route::get('/list', [ChatController::class, 'list'])->name('chats.list');
     });
 
 });

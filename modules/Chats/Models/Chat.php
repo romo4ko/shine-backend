@@ -15,17 +15,17 @@ class Chat extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'initiator',
-        'companion',
+        'initiator_id',
+        'companion_id',
     ];
 
     public function initiator()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'initiator_id');
     }
 
     public function companion()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'companion_id');
     }
 }

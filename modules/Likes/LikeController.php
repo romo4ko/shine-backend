@@ -17,6 +17,7 @@ class LikeController extends Controller
 
     public function __construct()
     {
+        /** @var User $this */
         $this->user = Auth::guard('sanctum')->user();
     }
 
@@ -33,12 +34,20 @@ class LikeController extends Controller
         ]);
 
         if ($recipocity != null) {
-            Chat::create([
-                'initiator' => $this->user->id,
-                'companion' => $request->whom,
-            ]);
 
-            return response(['status' => 'match']);
+            $chat = Chat::where('initiator_id', $this->user->id)
+                ->where('companion_id', $request->whom)
+                ->first();
+
+            if ($chat == null) {
+
+                Chat::create([
+                    'initiator_id' => $this->user->id,
+                    'companion_id' => $request->whom,
+                ]);
+
+                return response(['status' => 'match']);
+            }
         }
 
         return response(['status' => 'success']);
