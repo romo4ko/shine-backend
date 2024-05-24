@@ -21,16 +21,16 @@ class LikeController extends Controller
         $this->user = Auth::guard('sanctum')->user();
     }
 
-    public function like(Request $request, Like $like): array|Response
+    public function like(Request $request): array|Response
     {
         $recipocity = Like::where([
-            'who' => $request->whom,
-            'whom' => $this->user->id,
+            'who_id' => $request->whom,
+            'whom_id' => $this->user->id,
         ])->first();
 
         Like::create([
-            'who' => $this->user->id,
-            'whom' => $request->whom,
+            'who_id' => $this->user->id,
+            'whom_id' => $request->whom,
         ]);
 
         if ($recipocity != null) {

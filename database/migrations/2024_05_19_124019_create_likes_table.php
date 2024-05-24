@@ -13,8 +13,8 @@ return new class() extends Migration
     {
         Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('who')->constrained('users', 'id')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('whom')->constrained('users', 'id')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('who_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('whom_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

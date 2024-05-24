@@ -28,4 +28,9 @@ class Chat extends Model
     {
         return $this->belongsTo(User::class, 'companion_id');
     }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 }
