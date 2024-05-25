@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Illuminate\Support\Facades\Route;
 use Modules\Auth\Controllers\AuthController;
 use Modules\Chats\Controllers\ChatController;
+use Modules\Chats\Controllers\MessageController;
 use Modules\Likes\LikeController;
 use Modules\Users\Controllers\UserController;
 use Modules\Users\Controllers\UserImageController;
@@ -38,4 +39,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::get('/chat', [ChatController::class, 'messages'])->name('chat.messages');
     });
 
+    Route::group(['prefix' => 'message'], function () {
+        Route::post('/send', [MessageController::class, 'send'])->name('message.send');
+    });
 });

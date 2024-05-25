@@ -7,7 +7,7 @@ namespace Modules\Chats\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Modules\Chats\Models\Chat;
+use Modules\Chats\Models\Message;
 use Modules\Users\Models\User;
 
 class MessageController extends Controller
@@ -20,13 +20,22 @@ class MessageController extends Controller
         $this->user = Auth::guard('sanctum')->user();
     }
 
-    public function list(Request $request)
+    public function send(Request $request)
     {
         $request->validate([
             'chat_id' => 'required',
         ]);
-        $chat = Chat::findOrFail($request->chat_id);
 
-        return $chat->messages;
+        if ($request->has('text')) {
+            Message::create([
+                'chat_id' => $request->chat_id,
+                'sender_id' => $this->user->id,
+                'text' => $request->text,
+            ]);
+        } elseif ($request->has('content')) {
+            //
+        }
+
+        return ['status' => 'success'];
     }
 }
