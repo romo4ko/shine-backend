@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Modules\Users\Properties\Resources;
+namespace Modules\Users\Resources;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;

@@ -7,8 +7,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Modules\Cities\Models\City;
 use Modules\Properties\Models\Property;
-use Modules\Users\Images\Models\UserImage;
 use Modules\Users\Models\User;
+use Modules\Users\Models\UserImage;
 
 class TestDatabaseSeeder extends Seeder
 {

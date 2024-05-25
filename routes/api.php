@@ -7,8 +7,8 @@ use Modules\Auth\Controllers\AuthController;
 use Modules\Chats\Controllers\ChatController;
 use Modules\Likes\LikeController;
 use Modules\Users\Controllers\UserController;
-use Modules\Users\Images\Controllers\UserImageController;
-use Modules\Users\Properties\UserPropertiesController;
+use Modules\Users\Controllers\UserImageController;
+use Modules\Users\Controllers\UserPropertiesController;
 
 /*
 |--------------------------------------------------------------------------

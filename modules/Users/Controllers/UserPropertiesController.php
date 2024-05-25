@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Modules\Users\Properties;
+namespace Modules\Users\Controllers;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Modules\Cities\Models\City;
 use Modules\Properties\Models\Property;
 use Modules\Users\Models\User;
-use Modules\Users\Properties\Models\UserProperties;
+use Modules\Users\Models\UserProperties;
 
 class UserPropertiesController extends Controller
 {

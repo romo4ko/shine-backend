@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Users\Images\Controllers;
+namespace Modules\Users\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Modules\Users\Images\Resources\UserImageResource;
 use Modules\Users\Models\User;
+use Modules\Users\Resources\UserImageResource;
 
 class UserImageController
 {
