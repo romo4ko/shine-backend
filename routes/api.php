@@ -10,17 +10,6 @@ use Modules\Users\Controllers\UserController;
 use Modules\Users\Controllers\UserImageController;
 use Modules\Users\Controllers\UserPropertiesController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
 Route::group(['prefix' => 'auth'], function () {
     Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
     Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
@@ -32,8 +21,8 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::group(['prefix' => 'users'], function () {
         Route::get('/list', [UserController::class, 'getUsersList'])->name('users.list');
-        Route::post('/storeProperties', [UserPropertiesController::class, 'storeUserProperties'])->name('users.store');
-        Route::post('/updateProperties', [UserPropertiesController::class, 'updateUserProperties'])->name('users.update');
+        Route::post('/storeProperties', [UserPropertiesController::class, 'storeUserProperties'])->name('user.store');
+        Route::post('/updateProperties', [UserPropertiesController::class, 'updateUserProperties'])->name('user.update');
 
         Route::group(['prefix' => 'images'], function () {
             Route::post('/store', [UserImageController::class, 'store'])->name('image.store');
@@ -41,11 +30,12 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
 
     Route::group(['prefix' => 'likes'], function () {
-        Route::post('/set', [LikeController::class, 'like'])->name('likes.set');
+        Route::post('/set', [LikeController::class, 'like'])->name('like.set');
     });
 
     Route::group(['prefix' => 'chats'], function () {
         Route::get('/list', [ChatController::class, 'list'])->name('chats.list');
+        Route::get('/chat', [ChatController::class, 'messages'])->name('chat.messages');
     });
 
 });

@@ -9,10 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Modules\Chats\Models\Chat;
 use Modules\Chats\Resources\ChatResource;
-use Modules\Chats\Resources\ChatMessagesResource;
 use Modules\Users\Models\User;
 
-class ChatController extends Controller
+class MessageController extends Controller
 {
     private User $user;
 
@@ -24,20 +23,11 @@ class ChatController extends Controller
 
     public function list(Request $request)
     {
-        $chats = Chat::where('initiator_id', $this->user->id)
-            ->orWhere('companion_id', $this->user->id)
-            ->get();
-
-        return ChatResource::collection($chats);
-    }
-
-    public function messages(Request $request)
-    {
         $request->validate([
-            'chat_id' => 'required|integer',
+            'chat_id' => 'required',
         ]);
         $chat = Chat::findOrFail($request->chat_id);
 
-        return new ChatMessagesResource($chat);
+        return $chat->messages;
     }
 }

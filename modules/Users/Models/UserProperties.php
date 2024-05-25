@@ -4,7 +4,6 @@ namespace Modules\Users\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-
 class UserProperties extends Model
 {
     public $timestamps = true;

@@ -16,6 +16,10 @@ class Message extends Model
         'content',
     ];
 
+    protected $casts = [
+        'content' => 'array',
+    ];
+
     public function sender()
     {
         return $this->belongsTo(User::class, 'sender_id');
