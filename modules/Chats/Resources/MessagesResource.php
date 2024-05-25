@@ -7,11 +7,6 @@ namespace Modules\Chats\Resources;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Http\Resources\Json\ResourceCollection;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
-use Modules\Chats\Models\Chat;
-use Modules\Users\Models\User;
 
 class MessagesResource extends JsonResource
 {

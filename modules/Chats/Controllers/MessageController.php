@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Modules\Chats\Models\Chat;
-use Modules\Chats\Resources\ChatResource;
 use Modules\Users\Models\User;
 
 class MessageController extends Controller

@@ -4,14 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Chats\Resources;
 
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
-use Modules\Chats\Models\Chat;
 use Modules\Users\Models\User;
-use Modules\Users\Resources\UserImageResource;
-use Modules\Users\Resources\UserPropertiesResource;
 
 class ChatMessagesResource extends JsonResource
 {
