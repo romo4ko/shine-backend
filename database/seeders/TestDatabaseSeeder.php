@@ -55,7 +55,7 @@ class TestDatabaseSeeder extends Seeder
 
             $sign = $zodiac->getSignByDate($birthdate);
 
-            $user->properties->update(['sign' => $sign]);
+            $user->properties->update(['sign' => $sign->id]);
         }
     }
 
