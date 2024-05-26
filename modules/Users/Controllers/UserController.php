@@ -10,9 +10,17 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Modules\Users\Models\User;
 use Modules\Users\Resources\UserCollection;
+use Modules\Users\Resources\UserResource;
 
 class UserController extends Controller
 {
+    private User $user;
+
+    public function __construct()
+    {
+        $this->user = Auth::guard('sanctum')->user();
+    }
+
     public function getUsersList(Request $request): UserCollection
     {
         $user = Auth::user();
@@ -49,7 +57,7 @@ class UserController extends Controller
 
     public function getCurrentUser(User $user)
     {
-        //
+        return new UserResource($this->user);
     }
 
     public function deleteUser()

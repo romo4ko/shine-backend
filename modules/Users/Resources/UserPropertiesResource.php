@@ -42,8 +42,9 @@ class UserPropertiesResource extends JsonResource
     public function getProperty(?int $id): ?string
     {
         $property = Property::where('id', $id)->first();
+
         if ($property) {
-            return $property->name;
+            return $property->value;
         }
 
         return null;

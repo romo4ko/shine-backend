@@ -28,14 +28,13 @@ class AuthController extends Controller
         if (! $user || ! Hash::check($request->password, $user->password)) {
             return response([
                 'error' => 'Пользователя с такими данными не существует',
-            ], 401);
+            ]);
         }
 
-        if (is_null($user->name) ||
-            is_null($user->gender) ||
-            is_null($user->purpose) ||
+        if (is_null($user->properties->name) ||
+            is_null($user->properties->gender) ||
+            is_null($user->properties->purpose)
             // is_null($user->city) ||
-            count($user->images) == 0
         ) {
             return response([
                 'user' => $user,
