@@ -36,25 +36,27 @@ class UserPropertiesController extends Controller
         ];
         if ($request->hasAny($relatedProperties)) {
             foreach ($request->only($relatedProperties) as $type => $code) {
-                UserProperties::where('user_id', $this->user->id)
-                    ->update([
-                        $type => $property->getId($type, $code),
-                    ]);
+                if ($code != null) {
+                    UserProperties::where('user_id', $this->user->id)
+                        ->update([
+                            $type => $property->getId($type, $code),
+                        ]);
+                }
             }
         }
         if ($request->has('birthdate')) {
             UserProperties::where('user_id', $this->user->id)
                 ->update(
                     [
-                        'birthdate' => Carbon::parse($request['birthdate']),
+                        'birthdate' => Carbon::parse($request->birthdate),
                     ]
                 );
         }
-        if ($request->has('city')) {
+        if ($request->has('city') && $request->city != null) {
             UserProperties::where('user_id', $this->user->id)
                 ->update(
                     [
-                        'city' => $city->getIdByName($request['city']),
+                        'city' => $city->getIdByName($request->city),
                     ]
                 );
         }

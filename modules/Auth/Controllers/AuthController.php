@@ -9,8 +9,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Modules\Properties\Models\Property;
 use Modules\Users\Models\User;
+use Modules\Users\Zodiac;
 
 class AuthController extends Controller
 {
@@ -31,13 +31,26 @@ class AuthController extends Controller
             ], 401);
         }
 
+        if (is_null($user->name) ||
+            is_null($user->gender) ||
+            is_null($user->purpose) ||
+            // is_null($user->city) ||
+            count($user->images) == 0
+        ) {
+            return response([
+                'user' => $user,
+                'token' => $user->createToken('main')->plainTextToken,
+                'filled' => false,
+            ]);
+        }
+
         return response([
             'user' => $user,
             'token' => $user->createToken('main')->plainTextToken,
         ]);
     }
 
-    public function register(Request $request, Property $property): \Illuminate\Http\Response|array
+    public function register(Request $request, Zodiac $zodiac): \Illuminate\Http\Response|array
     {
         $request->validate(
             [
@@ -46,28 +59,23 @@ class AuthController extends Controller
             ]
         );
 
+        if (User::where('email', $request->email)->first() != null) {
+            return response([
+                'error' => 'Пользователь с такой почтой уже существует',
+            ]);
+        }
+
         $user = User::create([
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
         $birthdate = Carbon::createFromFormat('d.m.Y', $request->birthdate);
-        $sign = null;
-        foreach (config('properties.zodiac') as $zodiac) {
-
-            $dateFrom = Carbon::createFromFormat('d.m', $zodiac['dates'][0]);
-            $dateTo = Carbon::createFromFormat('d.m', $zodiac['dates'][1]);
-
-            if ($birthdate->month == $dateFrom->month && $birthdate->day >= $dateFrom->day ||
-                $birthdate->month == $dateTo->month && $birthdate->day <= $dateTo->day
-            ) {
-                $sign = $property->getId('zodiac', $zodiac['code']);
-            }
-        }
+        $sign = $zodiac->getSignByDate($birthdate);
 
         $user->properties->update([
             'birthdate' => $birthdate,
-            'sign' => $sign,
+            'sign' => $sign->id,
         ]);
 
         // TODO: Отправка письма для подтверждения

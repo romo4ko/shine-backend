@@ -6,7 +6,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Modules\Prediction\Models\Prediction;
+use Modules\Predictions\Models\Prediction;
 
 class PredictionsSeeder extends Seeder
 {

@@ -52,11 +52,6 @@ class UserController extends Controller
         //
     }
 
-    public function updateUserSetting(Request $request, User $user)
-    {
-        //
-    }
-
     public function deleteUser()
     {
         //

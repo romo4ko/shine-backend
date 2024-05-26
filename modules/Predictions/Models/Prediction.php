@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Modules\Prediction\Models;
+namespace Modules\Predictions\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

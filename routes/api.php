@@ -27,6 +27,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::group(['prefix' => 'images'], function () {
             Route::post('/store', [UserImageController::class, 'store'])->name('image.store');
         });
+
+        Route::get('/me', [UserController::class, 'getCurrentUser'])->name('user.self');
     });
 
     Route::group(['prefix' => 'likes'], function () {
