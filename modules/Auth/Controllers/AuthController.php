@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Modules\Properties\Models\Property;
 use Modules\Users\Models\User;
 
 class AuthController extends Controller
@@ -27,7 +28,7 @@ class AuthController extends Controller
         if (! $user || ! Hash::check($request->password, $user->password)) {
             return response([
                 'error' => 'Пользователя с такими данными не существует',
-            ]);
+            ], 401);
         }
 
         return response([
@@ -36,7 +37,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function register(Request $request): \Illuminate\Http\Response|array
+    public function register(Request $request, Property $property): \Illuminate\Http\Response|array
     {
         $request->validate(
             [
@@ -50,8 +51,23 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        $birthdate = Carbon::createFromFormat('d.m.Y', $request->birthdate);
+        $sign = null;
+        foreach (config('properties.zodiac') as $zodiac) {
+
+            $dateFrom = Carbon::createFromFormat('d.m', $zodiac['dates'][0]);
+            $dateTo = Carbon::createFromFormat('d.m', $zodiac['dates'][1]);
+
+            if ($birthdate->month == $dateFrom->month && $birthdate->day >= $dateFrom->day ||
+                $birthdate->month == $dateTo->month && $birthdate->day <= $dateTo->day
+            ) {
+                $sign = $property->getId('zodiac', $zodiac['code']);
+            }
+        }
+
         $user->properties->update([
-            'birthdate' => Carbon::parse($request->birtdate),
+            'birthdate' => $birthdate,
+            'sign' => $sign,
         ]);
 
         // TODO: Отправка письма для подтверждения
