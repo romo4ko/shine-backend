@@ -22,7 +22,6 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::group(['prefix' => 'users'], function () {
         Route::get('/list', [UserController::class, 'getUsersList'])->name('users.list');
-        Route::post('/storeProperties', [UserPropertiesController::class, 'storeUserProperties'])->name('user.store');
         Route::post('/updateProperties', [UserPropertiesController::class, 'updateUserProperties'])->name('user.update');
 
         Route::group(['prefix' => 'images'], function () {

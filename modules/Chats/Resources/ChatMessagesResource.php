@@ -25,6 +25,7 @@ class ChatMessagesResource extends JsonResource
         } else {
             $companion = $this->initiator;
         }
+
         return [
             'chat_id' => $this->id,
             'user_id' => $companion->id,

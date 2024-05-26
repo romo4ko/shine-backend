@@ -19,45 +19,10 @@ class UserPropertiesController extends Controller
 
     public function __construct()
     {
-        $this->user = Auth::user();
+        $this->user = Auth::guard('sanctum')->user();
     }
 
-    // For the first time during user registration
-    public function storeUserProperties(Request $request, Property $property, City $city): array
-    {
-        $request->validate(
-            [
-                'gender' => ['required'],
-                'name' => ['required'],
-                //                'city'      =>  ['required'],
-                //                'fs'        =>  ['required'],
-                //                'children'  =>  ['required'],
-                //                'smoking'   =>  ['required'],
-                //                'alcohol'   =>  ['required'],
-                //                'text'      =>  ['required'],
-                //                'tags'      =>  ['required'],
-            ]
-        );
-
-        UserProperties::where('user_id', $this->user->id)
-            ->update([
-                'name' => $request['name'],
-                'gender' => $property->getId('gender', $request['gender']),
-                'birthdate' => Carbon::parse($request['birthdate']),
-                'city' => $city->getIdByName($request['city']),
-                'fs' => $property->getId('fs', $request['fs']),
-                'children' => $property->getId('children', $request['children']),
-                'smoking' => $property->getId('smoking', $request['smoking']),
-                'alcohol' => $property->getId('alcohol', $request['alcohol']),
-                'text' => $request['text'],
-            ]);
-        // Tags
-
-        return [
-            'status' => 'success',
-        ];
-    }
-
+    // Store or update any user properties
     public function updateUserProperties(Request $request, Property $property, City $city): array
     {
         $relatedProperties = [
@@ -67,7 +32,7 @@ class UserPropertiesController extends Controller
             'children',
             'smoking',
             'alcohol',
-            'name',
+            'education',
         ];
         if ($request->hasAny($relatedProperties)) {
             foreach ($request->only($relatedProperties) as $type => $code) {
@@ -93,14 +58,14 @@ class UserPropertiesController extends Controller
                     ]
                 );
         }
-        if ($request->has('text')) {
+        if ($request->hasAny(['text', 'name', 'height'])) {
             UserProperties::where('user_id', $this->user->id)
                 ->update(
-                    [
-                        'text' => $request['text'],
-                    ]
+                    $request->only(['text', 'name', 'height'])
                 );
         }
+
+        // TODO: add sign
 
         return [
             'status' => 'success',
