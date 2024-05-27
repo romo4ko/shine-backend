@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\Auth\Controllers\AuthController;
 use Modules\Chats\Controllers\ChatController;
 use Modules\Chats\Controllers\MessageController;
+use Modules\Cities\Controllers\CitiesController;
 use Modules\Likes\LikeController;
 use Modules\Users\Controllers\UserController;
 use Modules\Users\Controllers\UserImageController;
@@ -42,5 +43,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::group(['prefix' => 'message'], function () {
         Route::post('/send', [MessageController::class, 'send'])->name('message.send');
+    });
+
+    Route::group(['prefix' => 'cities'], function () {
+        Route::get('/cities', [CitiesController::class, 'getCity'])->name('cities.getCity');
     });
 });
