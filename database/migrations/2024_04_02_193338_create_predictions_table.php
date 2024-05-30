@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class() extends Migration
+return new class () extends Migration
 {
     /**
      * Run the migrations.
@@ -17,9 +17,10 @@ return new class() extends Migration
             $table->id();
             $table->text('text');
             $table->foreignId('gender')->nullable()->constrained('properties');
-            $table->foreignId('sign')->nullable()->constrained('properties');
+            $table->foreignId('sign_id')->constrained('properties');
             $table->foreignId('type')->nullable()->constrained('properties');
             $table->json('extended')->nullable();
+            $table->timestamps();
         });
     }
 
