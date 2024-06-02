@@ -31,13 +31,13 @@ php artisan storage:link
 npm install
 ```
 ```bash
-npm run build
+npm run dev
 ```
 
 For development mode, use the command
 
 ```bash
-npm run dev
+npm run build
 ```
 
 ## Docker installation

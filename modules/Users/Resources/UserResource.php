@@ -69,6 +69,7 @@ class UserResource extends JsonResource
         }));
         $filled += count($this->images) / 2;
 
-        return intval(round($filled / $all * 100));
+        $percentage = intval(round($filled / $all * 100));
+        return min($percentage, 100);
     }
 }

@@ -22,30 +22,41 @@ Route::group(['prefix' => 'auth'], function () {
 // For authorized users
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::group(['prefix' => 'users'], function () {
-        Route::get('/list', [UserController::class, 'getUsersList'])->name('users.list');
-        Route::post('/updateProperties', [UserPropertiesController::class, 'updateUserProperties'])->name('user.update');
-
+        Route::get('/list', [UserController::class, 'getUsersList'])
+            ->name('users.list');
+        Route::post('/updateProperties', [UserPropertiesController::class, 'updateUserProperties'])
+            ->name('user.update');
         Route::group(['prefix' => 'images'], function () {
-            Route::post('/store', [UserImageController::class, 'store'])->name('image.store');
+            Route::post('/store', [UserImageController::class, 'store'])
+                ->name('image.store');
         });
-
-        Route::get('/me', [UserController::class, 'getCurrentUser'])->name('user.self');
+        Route::get('/me', [UserController::class, 'getCurrentUser'])
+            ->name('user.self');
     });
-
     Route::group(['prefix' => 'likes'], function () {
-        Route::post('/set', [LikeController::class, 'like'])->name('like.set');
+        Route::post('/set', [LikeController::class, 'like'])
+            ->name('like.set');
     });
-
     Route::group(['prefix' => 'chats'], function () {
-        Route::get('/list', [ChatController::class, 'list'])->name('chats.list');
-        Route::get('/chat', [ChatController::class, 'messages'])->name('chat.messages');
+        Route::get('/list', [ChatController::class, 'list'])
+            ->name('chats.list');
+        Route::get('/chat', [ChatController::class, 'messages'])
+            ->name('chat.messages');
     });
-
     Route::group(['prefix' => 'message'], function () {
-        Route::post('/send', [MessageController::class, 'send'])->name('message.send');
+        Route::post('/send', [MessageController::class, 'send'])
+            ->name('message.send');
     });
-
     Route::group(['prefix' => 'cities'], function () {
-        Route::get('/cities', [CitiesController::class, 'getCity'])->name('cities.getCity');
+        Route::get('/cities', [CitiesController::class, 'getCity'])
+            ->name('cities.getCity');
     });
 });
+
+
+
+
+
+
+
+

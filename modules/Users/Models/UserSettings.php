@@ -11,7 +11,6 @@ class UserSettings extends Model
     protected $fillable = [
         'user_id',
         'active',
-        'status',
         'bot_settings',
         'page',
         'filter',

@@ -189,10 +189,6 @@ return [
     // Статусы пользователя
     'user_statuses' => [
         [
-            'code' => 'admin',
-            'value' => 'Администратор',
-        ],
-        [
             'code' => 'confirmation',
             'value' => 'Подтверждение почты',
         ],

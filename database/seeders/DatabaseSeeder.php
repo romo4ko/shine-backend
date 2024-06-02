@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Http\Models\Admin;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Modules\Users\Models\User;
@@ -17,8 +18,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::query()->create(
+        Admin::query()->create(
             [
+                'name' => 'Admin',
                 'email' => 'admin@admin.ru',
                 'password' => Hash::make('password'),
             ]

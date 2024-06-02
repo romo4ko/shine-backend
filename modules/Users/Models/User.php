@@ -30,6 +30,24 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public static $confirmation = 1;
+    public static $moderation = 2;
+    public static $rejected = 3;
+    public static $blocked = 4;
+    public static $published = 5;
+
+
+    public function getStatuses(): array
+    {
+        return array_reduce(config('properties.user_statuses'), function ($status, $item) {
+            $key = strval($item['code']);
+            $value = $item['value'];
+            $status[$key] = $value;
+
+            return $status;
+        }, []);
+    }
+
     protected static function booted(): void
     {
         static::created(function (User $user) {
@@ -37,7 +55,6 @@ class User extends Authenticatable
             UserSettings::query()->create([
                 'user_id' => $user->id,
                 'active' => true,
-                'status' => $property->getId('user_statuses', 'confirmation'),
                 'bot_settings' => $property->getId('prediction_types', 'mixed'),
                 'pagination' => config('settings.users.pagination'),
                 'filter' => config('settings.users.filter'),
@@ -61,5 +78,10 @@ class User extends Authenticatable
     public function images()
     {
         return $this->hasMany(UserImage::class);
+    }
+
+    protected function getStatusAttribute()
+    {
+        return fake()->randomElements(['Подтверждение почты', 'На модерации', 'Опубликован']);
     }
 }
