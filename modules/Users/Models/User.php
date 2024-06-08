@@ -30,12 +30,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public static $confirmation = 1;
-    public static $moderation = 2;
-    public static $rejected = 3;
-    public static $blocked = 4;
-    public static $published = 5;
+    public const confirmation = 0;
 
+    public const moderation = 1;
+
+    public const rejected = 2;
+
+    public const blocked = 3;
+
+    public const published = 4;
 
     public function getStatuses(): array
     {
@@ -46,6 +49,12 @@ class User extends Authenticatable
 
             return $status;
         }, []);
+    }
+
+    public function getStatusNameAttribute(): string
+    {
+        $statuses = config('properties.user_statuses');
+        return $statuses[$this->status]['value'];
     }
 
     protected static function booted(): void
@@ -78,10 +87,5 @@ class User extends Authenticatable
     public function images()
     {
         return $this->hasMany(UserImage::class);
-    }
-
-    protected function getStatusAttribute()
-    {
-        return fake()->randomElements(['Подтверждение почты', 'На модерации', 'Опубликован']);
     }
 }

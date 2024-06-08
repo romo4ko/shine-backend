@@ -52,11 +52,3 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
             ->name('cities.getCity');
     });
 });
-
-
-
-
-
-
-
-

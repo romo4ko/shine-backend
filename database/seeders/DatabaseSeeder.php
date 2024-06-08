@@ -7,7 +7,6 @@ namespace Database\Seeders;
 use App\Http\Models\Admin;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use Modules\Users\Models\User;
 
 class DatabaseSeeder extends Seeder
 {

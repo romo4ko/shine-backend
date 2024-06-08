@@ -4,12 +4,12 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
 use Filament\Forms;
+use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 use Modules\Users\Models\User;
 
 class UserResource extends Resource
@@ -39,6 +39,8 @@ class UserResource extends Resource
 
     public static function table(Table $table): Table
     {
+        $statuses = config('properties.user_statuses');
+
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('properties.name')
@@ -48,16 +50,44 @@ class UserResource extends Resource
                     ->label('Почта')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->date('d.m.Y')
-                    ->label('Дата регистрации'),
-                Tables\Columns\TextColumn::make('status')
+                    ->date('d.m.Y H:i')
+                    ->label('Зарегистрирован'),
+                Tables\Columns\TextColumn::make('statusName')
                     ->default('Подтверждение почты')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        $statuses[User::confirmation]['value'] => 'gray',
+                        $statuses[User::moderation]['value'] => 'warning',
+                        $statuses[User::published]['value'] => 'success',
+                        $statuses[User::blocked]['value'] => 'danger',
+                        $statuses[User::rejected]['value'] => 'danger',
+                    })
                     ->label('Статус')
                     ->searchable(),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
-                //
+                  Filter::make('moderation')
+                      ->toggle()
+                      ->query(fn (Builder $query): Builder => $query->orWhere('status', User::moderation))
+                      ->label('На модерации')
+                      ->default(),
+                  Filter::make('published')
+                      ->toggle()
+                      ->query(fn (Builder $query): Builder => $query->orWhere('status', User::published))
+                      ->label('Опубликован'),
+                  Filter::make('blocked')
+                      ->toggle()
+                      ->query(fn (Builder $query): Builder => $query->orWhere('status', User::blocked))
+                      ->label('Заблокирован'),
+                  Filter::make('confirmation')
+                      ->toggle()
+                      ->query(fn (Builder $query): Builder => $query->orWhere('status', User::confirmation))
+                      ->label('Подтверждение почты'),
+                  Filter::make('rejected')
+                      ->toggle()
+                      ->query(fn (Builder $query): Builder => $query->orWhere('status', User::rejected))
+                      ->label('Отклонён модерацией'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -85,10 +115,3 @@ class UserResource extends Resource
         ];
     }
 }
-
-
-
-
-
-
-
