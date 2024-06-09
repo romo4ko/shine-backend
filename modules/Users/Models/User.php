@@ -19,6 +19,7 @@ class User extends Authenticatable
     protected $fillable = [
         'email',
         'password',
+        'status',
     ];
 
     protected $hidden = [
@@ -54,6 +55,7 @@ class User extends Authenticatable
     public function getStatusNameAttribute(): string
     {
         $statuses = config('properties.user_statuses');
+
         return $statuses[$this->status]['value'];
     }
 
