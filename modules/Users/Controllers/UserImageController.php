@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Modules\Users\Models\User;
 use Modules\Users\Resources\UserImageResource;
+use Illuminate\Support\Facades\File;
 
 class UserImageController
 {
@@ -28,6 +29,14 @@ class UserImageController
         $fileNewName = $request->sorting.'_'.time().'.'.$fileOriginalName;
         $path = '/images/'.$this->user->id.'/'.$fileNewName;
         $image->storeAs('/images/'.$this->user->id, $fileNewName, 'public');
+
+        $last = $this->user
+            ->images()
+            ->where('sorting', $request->sorting)
+            ->first();
+        if ($last !== null) {
+            File::delete($last->path);
+        }
 
         $this->user->images()->updateOrInsert(
             [

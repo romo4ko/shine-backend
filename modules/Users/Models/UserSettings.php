@@ -3,6 +3,7 @@
 namespace Modules\Users\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Modules\Properties\Models\Property;
 
 class UserSettings extends Model
 {
@@ -19,8 +20,19 @@ class UserSettings extends Model
     ];
 
     protected $casts = [
+        'active' => 'boolean',
         'filter' => 'array',
         'pagination' => 'array',
         'extended' => 'array',
     ];
+
+    public function getId(string $type, string $code): ?int
+    {
+        $property = Property::where('type', $type)->where('code', $code)->first();
+        if ($property) {
+            return $property->id;
+        }
+
+        return null;
+    }
 }

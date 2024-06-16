@@ -24,6 +24,7 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'image' => $this->getMainImage(),
             'is_premium' => false,
+            'active' => $this->settings->active,
             'bot_settings' => $this->getSettings($this->settings->bot_settings),
             'profile_filled' => $this->getProfileFilledPercentage($properties),
             'invites' => 0,
@@ -72,5 +73,10 @@ class UserResource extends JsonResource
         $percentage = intval(round($filled / $all * 100));
 
         return min($percentage, 100);
+    }
+
+    public function getImages()
+    {
+
     }
 }

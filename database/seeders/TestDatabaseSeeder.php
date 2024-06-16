@@ -35,7 +35,12 @@ class TestDatabaseSeeder extends Seeder
                 'path' => $images[array_rand($images)],
             ]);
 
-            $birthdate = Carbon::parse(fake()->date());
+            $birthdate = Carbon::parse(
+                fake()->dateTimeBetween(
+                    Carbon::now()->subYears(50),
+                    Carbon::now()->subYears(18)
+                )
+            )->format('Y-m-d');
 
             $user->properties->update([
                 'name' => fake()->firstName(),

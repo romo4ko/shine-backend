@@ -5,10 +5,15 @@ declare(strict_types=1);
 namespace Modules\Users\Controllers;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
+use Modules\Cities\Models\City;
+use Modules\Properties\Models\Property;
 use Modules\Users\Models\User;
+use Modules\Users\Models\UserProperties;
+use Modules\Users\Models\UserSettings;
 use Modules\Users\Resources\UserCollection;
 use Modules\Users\Resources\UserResource;
 
@@ -18,7 +23,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->user = Auth::guard('sanctum')->user();
+        $this->user = Auth::guard('api')->user();
     }
 
     public function getUsersList(Request $request): UserCollection
@@ -48,6 +53,86 @@ class UserController extends Controller
                     'key' => 'value',
                 ],
             ]);
+    }
+
+    // Store or update any user properties
+    public function updateProperties(Request $request, Property $property, City $city): array
+    {
+        $relatedProperties = [
+            'gender',
+            'fs',
+            'purpose',
+            'children',
+            'smoking',
+            'alcohol',
+            'education',
+        ];
+        if ($request->hasAny($relatedProperties)) {
+            foreach ($request->only($relatedProperties) as $type => $code) {
+                if ($code != null) {
+                    UserProperties::where('user_id', $this->user->id)
+                        ->update([
+                                     $type => $property->getId($type, $code),
+                                 ]);
+                }
+            }
+        }
+        if ($request->has('birthdate')) {
+            UserProperties::where('user_id', $this->user->id)
+                ->update(
+                    [
+                        'birthdate' => Carbon::parse($request->birthdate),
+                    ]
+                );
+        }
+        if ($request->has('city') && $request->city != null) {
+            UserProperties::where('user_id', $this->user->id)
+                ->update(
+                    [
+                        'city' => $city->getIdByName($request->city),
+                    ]
+                );
+        }
+        if ($request->hasAny(['text', 'name', 'height'])) {
+            UserProperties::where('user_id', $this->user->id)
+                ->update(
+                    $request->only(['text', 'name', 'height'])
+                );
+        }
+
+        // TODO: add sign
+
+        return [
+            'status' => 'success',
+        ];
+    }
+
+    public function updateSettings(Request $request, UserSettings $settings): array
+    {
+        if ($request->hasAny('active')) {
+            $settings->where('user_id', $this->user->id)
+                ->update([
+                    'active' => $request->active ? 1 : 0,
+                ]);
+        }
+
+        $settingsNames = [
+            'bot_settings'
+        ];
+        if ($request->hasAny($settingsNames)) {
+            foreach ($request->only($settingsNames) as $type => $code) {
+                if ($code != null) {
+                    $settings->where('user_id', $this->user->id)
+                        ->update([
+                            $type => $settings->getId($type, $code),
+                        ]);
+                }
+            }
+        }
+
+        return [
+            'status' => 'success',
+        ];
     }
 
     public function getUserDetail(Request $request, User $user)
