@@ -107,7 +107,7 @@ class UserController extends Controller
         ];
     }
 
-    public function updateSettings(Request $request, UserSettings $settings): array
+    public function updateSettings(Request $request, UserSettings $settings, Property $property): array
     {
         if ($request->hasAny('active')) {
             $settings->where('user_id', $this->user->id)
@@ -116,18 +116,11 @@ class UserController extends Controller
                 ]);
         }
 
-        $settingsNames = [
-            'bot_settings'
-        ];
-        if ($request->hasAny($settingsNames)) {
-            foreach ($request->only($settingsNames) as $type => $code) {
-                if ($code != null) {
-                    $settings->where('user_id', $this->user->id)
-                        ->update([
-                            $type => $settings->getId($type, $code),
-                        ]);
-                }
-            }
+        if ($request->hasAny('bot_settings')) {
+            $settings->where('user_id', $this->user->id)
+                ->update([
+                     'bot_settings' => $property->getId('prediction_types', $request->bot_settings),
+                ]);
         }
 
         return [
