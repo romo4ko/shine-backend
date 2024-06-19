@@ -4,9 +4,9 @@ namespace Modules\Users\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Modules\Users\Models\User;
 use Modules\Users\Resources\UserImageResource;
-use Illuminate\Support\Facades\File;
 
 class UserImageController
 {

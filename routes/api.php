@@ -10,7 +10,6 @@ use Modules\Cities\Controllers\CitiesController;
 use Modules\Likes\LikeController;
 use Modules\Users\Controllers\UserController;
 use Modules\Users\Controllers\UserImageController;
-use Modules\Users\Controllers\UserPropertiesController;
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
@@ -31,6 +30,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
         Route::post('/updateSettings', [UserController::class, 'updateSettings'])
             ->name('user.updateSettings');
+
+        Route::post('/delete', [UserController::class, 'deleteUser'])
+            ->name('user.deleteUser');
 
         Route::group(['prefix' => 'images'], function () {
             Route::post('/store', [UserImageController::class, 'store'])

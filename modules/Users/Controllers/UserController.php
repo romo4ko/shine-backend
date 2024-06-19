@@ -72,8 +72,8 @@ class UserController extends Controller
                 if ($code != null) {
                     UserProperties::where('user_id', $this->user->id)
                         ->update([
-                                     $type => $property->getId($type, $code),
-                                 ]);
+                            $type => $property->getId($type, $code),
+                        ]);
                 }
             }
         }
@@ -119,7 +119,7 @@ class UserController extends Controller
         if ($request->hasAny('bot_settings')) {
             $settings->where('user_id', $this->user->id)
                 ->update([
-                     'bot_settings' => $property->getId('prediction_types', $request->bot_settings),
+                    'bot_settings' => $property->getId('prediction_types', $request->bot_settings),
                 ]);
         }
 
@@ -140,6 +140,10 @@ class UserController extends Controller
 
     public function deleteUser()
     {
-        //
+        $this->user->delete();
+
+        return [
+            'status' => 'success',
+        ];
     }
 }
