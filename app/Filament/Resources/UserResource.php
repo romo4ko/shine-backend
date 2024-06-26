@@ -44,11 +44,11 @@ class UserResource extends Resource
                 Forms\Components\Select::make('status')
                     ->label('status')
                     ->options([
-                        User::confirmation => $statuses[User::confirmation]['value'],
-                        User::moderation => $statuses[User::moderation]['value'],
-                        User::published => $statuses[User::published]['value'],
-                        User::blocked => $statuses[User::blocked]['value'],
-                        User::rejected => $statuses[User::rejected]['value'],
+                        User::CONFIRMATION => $statuses[User::CONFIRMATION]['value'],
+                        User::MODERATION => $statuses[User::moderation]['value'],
+                        User::PUBLISHED => $statuses[User::PUBLISHED]['value'],
+                        User::BLOCKED => $statuses[User::blocked]['value'],
+                        User::REJECTED => $statuses[User::rejected]['value'],
                     ]),
             ]);
     }
@@ -72,11 +72,11 @@ class UserResource extends Resource
                     ->default('Подтверждение почты')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
-                        $statuses[User::confirmation]['value'] => 'gray',
-                        $statuses[User::moderation]['value'] => 'warning',
+                        $statuses[User::CONFIRMATION]['value'] => 'gray',
+                        $statuses[User::MODERATION]['value'] => 'warning',
                         $statuses[User::published]['value'] => 'success',
-                        $statuses[User::blocked]['value'] => 'danger',
-                        $statuses[User::rejected]['value'] => 'danger',
+                        $statuses[User::BLOCKED]['value'] => 'danger',
+                        $statuses[User::REJECTED]['value'] => 'danger',
                     })
                     ->label('Статус'),
             ])

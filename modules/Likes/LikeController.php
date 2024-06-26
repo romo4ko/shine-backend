@@ -57,16 +57,17 @@ class LikeController extends Controller
         return response(['status' => 'success']);
     }
 
-    public function confirm() {
+    public function confirm()
+    {
         Like::where([
             'who_id' => request('who'),
             'whom_id' => $this->user->id,
         ])->update(['status' => Like::CONFIRMED]);
 
         Chat::create([
-             'initiator_id' => $this->user->id,
-             'companion_id' => request('who'),
-         ]);
+            'initiator_id' => $this->user->id,
+            'companion_id' => request('who'),
+        ]);
 
         return $this->likes();
     }

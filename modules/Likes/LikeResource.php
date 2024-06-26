@@ -6,8 +6,6 @@ namespace Modules\Likes;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Modules\Properties\Models\Property;
-use Modules\Users\Resources\UserResource;
 
 class LikeResource extends JsonResource
 {
@@ -19,6 +17,7 @@ class LikeResource extends JsonResource
             'likes' => $this->resource,
         ];
     }
+
     public function toArray(Request $request): array
     {
         return [

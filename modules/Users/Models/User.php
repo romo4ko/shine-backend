@@ -31,15 +31,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public const confirmation = 0;
+    public const CONFIRMATION = 0;
 
-    public const moderation = 1;
+    public const MODERATION = 1;
 
-    public const rejected = 2;
+    public const REJECTED = 2;
 
-    public const blocked = 3;
+    public const BLOCKED = 3;
 
-    public const published = 4;
+    public const PUBLISHED = 4;
 
     public function getStatuses(): array
     {
@@ -96,6 +96,7 @@ class User extends Authenticatable
         if (count($this->images)) {
             return env('APP_URL').'/storage'.$this->images[0]->path;
         }
+
         return null;
     }
 }

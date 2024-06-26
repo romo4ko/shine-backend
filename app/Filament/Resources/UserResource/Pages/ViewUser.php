@@ -36,11 +36,11 @@ class ViewUser extends ViewRecord
                     Infolists\Components\TextEntry::make('statusName')
                         ->badge()
                         ->color(fn (string $state): string => match ($state) {
-                            $statuses[User::confirmation]['value'] => 'gray',
-                            $statuses[User::moderation]['value'] => 'warning',
-                            $statuses[User::published]['value'] => 'success',
-                            $statuses[User::blocked]['value'] => 'danger',
-                            $statuses[User::rejected]['value'] => 'danger',
+                            $statuses[User::CONFIRMATION]['value'] => 'gray',
+                            $statuses[User::MODERATION]['value'] => 'warning',
+                            $statuses[User::PUBLISHED]['value'] => 'success',
+                            $statuses[User::BLOCKED]['value'] => 'danger',
+                            $statuses[User::REJECTED]['value'] => 'danger',
                         })
                         ->label('Статус'),
                 ])->columns(3),
