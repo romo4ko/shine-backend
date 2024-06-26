@@ -140,6 +140,7 @@ class UserController extends Controller
 
     public function deleteUser()
     {
+        $this->user->currentAccessToken()->delete();
         $this->user->delete();
 
         return [

@@ -46,6 +46,15 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::group(['prefix' => 'likes'], function () {
         Route::post('/set', [LikeController::class, 'like'])
             ->name('like.set');
+
+        Route::post('/revoke', [LikeController::class, 'revoke'])
+            ->name('like.revoke');
+
+        Route::post('/confirm', [LikeController::class, 'confirm'])
+            ->name('like.confirm');
+
+        Route::get('/list', [LikeController::class, 'likes'])
+            ->name('likes.list');
     });
 
     Route::group(['prefix' => 'chats'], function () {
@@ -63,9 +72,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
             ->name('message.send');
     });
 
-    Route::group(['prefix' => 'cities'], function () {
-
-        Route::get('/cities', [CitiesController::class, 'getCity'])
-            ->name('cities.getCity');
-    });
+    Route::get('/cities', [CitiesController::class, 'getCity'])
+        ->name('cities.getCity');
 });

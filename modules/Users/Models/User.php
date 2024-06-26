@@ -90,4 +90,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserImage::class);
     }
+
+    public function getMainImage(): ?string
+    {
+        if (count($this->images)) {
+            return env('APP_URL').'/storage'.$this->images[0]->path;
+        }
+        return null;
+    }
 }

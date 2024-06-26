@@ -40,7 +40,7 @@ class TestDatabaseSeeder extends Seeder
                     Carbon::now()->subYears(50),
                     Carbon::now()->subYears(18)
                 )
-            )->format('Y-m-d');
+            );
 
             $user->properties->update([
                 'name' => fake()->firstName(),

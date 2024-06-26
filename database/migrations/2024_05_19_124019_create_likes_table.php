@@ -15,6 +15,7 @@ return new class() extends Migration
             $table->id();
             $table->foreignId('who_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('whom_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('status')->nullable()->default(null);
             $table->timestamps();
         });
     }

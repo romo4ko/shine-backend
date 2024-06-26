@@ -2,6 +2,7 @@
 
 namespace Modules\Likes;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Users\Models\User;
 
@@ -12,7 +13,12 @@ class Like extends Model
     protected $fillable = [
         'who_id',
         'whom_id',
+        'status',
     ];
+
+    public const MATCHED = 1;
+    public const CONFIRMED = 2;
+    public const REVOKED = 3;
 
     public function who()
     {
