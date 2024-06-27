@@ -22,7 +22,9 @@ class CitiesController extends Controller
             return City::whereRaw(
                 'LOWER(`name`) LIKE ? ',
                 ['%'.trim(strtolower($request->text)).'%']
-            )->get();
+            )
+                ->limit(10)
+                ->get();
         }
 
         return [];

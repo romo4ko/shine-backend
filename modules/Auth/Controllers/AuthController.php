@@ -101,8 +101,22 @@ class AuthController extends Controller
     {
         $user = Auth::guard('sanctum')->user();
 
+        if (! $user) {
+            return response([
+                'error' => 'Пользователь не авторизован',
+            ]);
+        }
+
+        $filled = null;
+        if ($user->properties->purpose === null) {
+            $filled = 'purpose';
+        } elseif ($user->properties->name === null) {
+            $filled = 'info';
+        }
+
         return response([
             'user' => $user,
+            'filled' => $filled,
         ]);
     }
 }
