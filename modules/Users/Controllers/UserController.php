@@ -85,13 +85,21 @@ class UserController extends Controller
                     ]
                 );
         }
-        if ($request->has('city') && $request->city != null) {
-            UserProperties::where('user_id', $this->user->id)
-                ->update(
-                    [
-                        'city' => $city->getIdByName($request->city),
-                    ]
-                );
+        if ($request->has('city')) {
+            $city = $city->where('name', $request->city)->first();
+            if ($city == null) {
+                return [
+                    'status' => 'error',
+                    'message' => 'Город не найден',
+                ];
+            } else {
+                UserProperties::where('user_id', $this->user->id)
+                    ->update(
+                        [
+                            'city' => $city->id,
+                        ]
+                    );
+            }
         }
         if ($request->hasAny(['text', 'name', 'height'])) {
             UserProperties::where('user_id', $this->user->id)
