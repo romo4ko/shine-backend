@@ -14,6 +14,7 @@ class PredictionController
     {
         $this->user = Auth::guard('api')->user();
     }
+
     public function getPrediction(Property $property): array
     {
         $type = $property->find($this->user->settings->bot_settings);
@@ -21,13 +22,13 @@ class PredictionController
             $prediction = Prediction::query()
                 ->inRandomOrder()
                 ->first();
-        }
-        else {
+        } else {
             $prediction = Prediction::where('type_id', $type->id)
                 ->inRandomOrder()
                 ->first();
         }
 
+        // If predictions limit has been reached: return ['error' => 'message'];
         return ['text' => $prediction->text];
     }
 }

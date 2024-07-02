@@ -16,7 +16,7 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
 
     protected static ?string $navigationLabel = 'Пользователи';
 
@@ -45,10 +45,10 @@ class UserResource extends Resource
                     ->label('status')
                     ->options([
                         User::CONFIRMATION => $statuses[User::CONFIRMATION]['value'],
-                        User::MODERATION => $statuses[User::moderation]['value'],
+                        User::MODERATION => $statuses[User::MODERATION]['value'],
                         User::PUBLISHED => $statuses[User::PUBLISHED]['value'],
-                        User::BLOCKED => $statuses[User::blocked]['value'],
-                        User::REJECTED => $statuses[User::rejected]['value'],
+                        User::BLOCKED => $statuses[User::BLOCKED]['value'],
+                        User::REJECTED => $statuses[User::REJECTED]['value'],
                     ]),
             ]);
     }
@@ -74,7 +74,7 @@ class UserResource extends Resource
                     ->color(fn (string $state): string => match ($state) {
                         $statuses[User::CONFIRMATION]['value'] => 'gray',
                         $statuses[User::MODERATION]['value'] => 'warning',
-                        $statuses[User::published]['value'] => 'success',
+                        $statuses[User::PUBLISHED]['value'] => 'success',
                         $statuses[User::BLOCKED]['value'] => 'danger',
                         $statuses[User::REJECTED]['value'] => 'danger',
                     })
@@ -84,24 +84,24 @@ class UserResource extends Resource
             ->filters([
                 Filter::make('moderation')
                     ->toggle()
-                    ->query(fn (Builder $query): Builder => $query->orWhere('status', User::moderation))
+                    ->query(fn (Builder $query): Builder => $query->orWhere('status', User::MODERATION))
                     ->label('На модерации')
                     ->default(),
                 Filter::make('published')
                     ->toggle()
-                    ->query(fn (Builder $query): Builder => $query->orWhere('status', User::published))
+                    ->query(fn (Builder $query): Builder => $query->orWhere('status', User::PUBLISHED))
                     ->label('Опубликован'),
                 Filter::make('blocked')
                     ->toggle()
-                    ->query(fn (Builder $query): Builder => $query->orWhere('status', User::blocked))
+                    ->query(fn (Builder $query): Builder => $query->orWhere('status', User::BLOCKED))
                     ->label('Заблокирован'),
                 Filter::make('confirmation')
                     ->toggle()
-                    ->query(fn (Builder $query): Builder => $query->orWhere('status', User::confirmation))
+                    ->query(fn (Builder $query): Builder => $query->orWhere('status', User::CONFIRMATION))
                     ->label('Подтверждение почты'),
                 Filter::make('rejected')
                     ->toggle()
-                    ->query(fn (Builder $query): Builder => $query->orWhere('status', User::rejected))
+                    ->query(fn (Builder $query): Builder => $query->orWhere('status', User::REJECTED))
                     ->label('Отклонён модерацией'),
             ])
             ->actions([

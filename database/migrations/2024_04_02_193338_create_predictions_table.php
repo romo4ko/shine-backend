@@ -20,6 +20,7 @@ return new class() extends Migration
             $table->foreignId('sign_id')->nullable()->constrained('properties');
             $table->foreignId('type_id')->nullable()->constrained('properties');
             $table->json('extended')->nullable();
+            $table->timestamps();
         });
     }
 
