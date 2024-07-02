@@ -52,18 +52,18 @@ class PredictionResource extends Resource
                 Forms\Components\Select::make('sign_id')
                     ->label('Целевой пол')
                     ->options([
-                        $property->getId('zodiac_signs', 'aries') => 'Овен',
-                        $property->getId('zodiac_signs', 'taurus') => 'Телец',
-                        $property->getId('zodiac_signs', 'gemini') => 'Близнецы',
-                        $property->getId('zodiac_signs', 'cancer') => 'Рак',
-                        $property->getId('zodiac_signs', 'leo') => 'Лев',
-                        $property->getId('zodiac_signs', 'virgo') => 'Дева',
-                        $property->getId('zodiac_signs', 'libra') => 'Весы',
-                        $property->getId('zodiac_signs', 'scorpio') => 'Скорпион',
-                        $property->getId('zodiac_signs', 'sagittarius') => 'Стрелец',
-                        $property->getId('zodiac_signs', 'capricorn') => 'Козерог',
-                        $property->getId('zodiac_signs', 'aquarius') => 'Водолей',
-                        $property->getId('zodiac_signs', 'pisces') => 'Рыбы',
+                        $property->getId('zodiac', 'aries') => 'Овен',
+                        $property->getId('zodiac', 'taurus') => 'Телец',
+                        $property->getId('zodiac', 'gemini') => 'Близнецы',
+                        $property->getId('zodiac', 'cancer') => 'Рак',
+                        $property->getId('zodiac', 'leo') => 'Лев',
+                        $property->getId('zodiac', 'virgo') => 'Дева',
+                        $property->getId('zodiac', 'libra') => 'Весы',
+                        $property->getId('zodiac', 'scorpio') => 'Скорпион',
+                        $property->getId('zodiac', 'sagittarius') => 'Стрелец',
+                        $property->getId('zodiac', 'capricorn') => 'Козерог',
+                        $property->getId('zodiac', 'aquarius') => 'Водолей',
+                        $property->getId('zodiac', 'pisces') => 'Рыбы',
                     ]),
             ]);
     }
