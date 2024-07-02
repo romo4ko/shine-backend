@@ -16,9 +16,9 @@ return new class() extends Migration
         Schema::create('predictions', function (Blueprint $table) {
             $table->id();
             $table->text('text');
-            $table->foreignId('gender')->nullable()->constrained('properties');
-            $table->foreignId('sign')->nullable()->constrained('properties');
-            $table->foreignId('type')->nullable()->constrained('properties');
+            $table->foreignId('gender_id')->nullable()->constrained('properties');
+            $table->foreignId('sign_id')->nullable()->constrained('properties');
+            $table->foreignId('type_id')->nullable()->constrained('properties');
             $table->json('extended')->nullable();
         });
     }

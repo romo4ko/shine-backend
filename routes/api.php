@@ -8,6 +8,7 @@ use Modules\Chats\Controllers\ChatController;
 use Modules\Chats\Controllers\MessageController;
 use Modules\Cities\Controllers\CitiesController;
 use Modules\Likes\LikeController;
+use Modules\Predictions\PredictionController;
 use Modules\Users\Controllers\UserController;
 use Modules\Users\Controllers\UserImageController;
 
@@ -74,4 +75,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::get('/cities', [CitiesController::class, 'getCity'])
         ->name('cities.getCity');
+
+    Route::group(['prefix' => 'prediction'], function () {
+        Route::get('/get', [PredictionController::class, 'getPrediction'])
+            ->name('prediction.get');
+    });
 });

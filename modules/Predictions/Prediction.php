@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Modules\Predictions\Models;
+namespace Modules\Predictions;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,9 +12,9 @@ class Prediction extends Model
 
     protected $fillable = [
         'text',
-        'gender',
-        'sign',
-        'type',
+        'gender_id',
+        'sign_id',
+        'type_id',
         'extended',
     ];
 }

@@ -6,7 +6,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Modules\Predictions\Models\Prediction;
+use Modules\Predictions\Prediction;
+use Modules\Properties\Models\Property;
 
 class PredictionsSeeder extends Seeder
 {
@@ -21,16 +22,15 @@ class PredictionsSeeder extends Seeder
     public function createBasePredictions(): void
     {
         $predictionsConfig = config('predictions');
+        $property = new Property();
 
-        DB::transaction(function () use ($predictionsConfig) {
-            foreach ($predictionsConfig as $predictions) {
+        DB::transaction(function () use ($predictionsConfig, $property) {
+            foreach ($predictionsConfig as $type => $predictions) {
                 foreach ($predictions as $prediction) {
-                    Prediction::updateOrCreate(
+                    Prediction::create(
                         [
-                            'text' => $prediction['text'],
-                            'gender' => $prediction['gender'],
-                            'sign' => $prediction['sign'],
-                            'type' => $prediction['type'],
+                            'text' => $prediction,
+                            'type_id' => $property->getId('prediction_types', $type),
                         ],
                     );
                 }

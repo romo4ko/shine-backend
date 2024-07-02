@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PropertiesSeeder::class,
             CitiesSeeder::class,
+            PredictionsSeeder::class,
         ]);
 
         if (env('APP_DEBUG')) {

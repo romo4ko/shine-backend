@@ -13,8 +13,8 @@ return new class() extends Migration
     {
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
             $table->string('code')->unique();
+            $table->string('type');
             $table->string('value');
         });
     }
