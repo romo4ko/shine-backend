@@ -6,7 +6,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Modules\Properties\Models\Property;
+use Modules\Properties\Property;
 
 class PropertiesSeeder extends Seeder
 {

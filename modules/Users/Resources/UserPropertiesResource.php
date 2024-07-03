@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Modules\Cities\Models\City;
-use Modules\Properties\Models\Property;
+use Modules\Properties\Property;
 
 class UserPropertiesResource extends JsonResource
 {

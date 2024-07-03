@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Modules\Predictions;
 
 use Illuminate\Database\Eloquent\Model;
-use Modules\Properties\Models\Property;
+use Modules\Properties\Property;
 
 class Prediction extends Model
 {
@@ -24,6 +24,16 @@ class Prediction extends Model
     ];
 
     public function gender()
+    {
+        return $this->belongsTo(Property::class);
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(Property::class);
+    }
+
+    public function sign()
     {
         return $this->belongsTo(Property::class);
     }

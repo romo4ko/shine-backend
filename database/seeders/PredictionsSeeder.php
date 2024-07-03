@@ -7,7 +7,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Modules\Predictions\Prediction;
-use Modules\Properties\Models\Property;
+use Modules\Properties\Property;
 
 class PredictionsSeeder extends Seeder
 {

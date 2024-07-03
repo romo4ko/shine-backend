@@ -3,7 +3,7 @@
 namespace Modules\Predictions;
 
 use Illuminate\Support\Facades\Auth;
-use Modules\Properties\Models\Property;
+use Modules\Properties\Property;
 use Modules\Users\Models\User;
 
 class PredictionController

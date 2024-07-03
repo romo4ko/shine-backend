@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Modules\Users;
 
 use Carbon\Carbon;
-use Modules\Properties\Models\Property;
+use Modules\Properties\Property;
 
 class Zodiac
 {

@@ -9,7 +9,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Modules\Predictions\Prediction;
-use Modules\Properties\Models\Property;
+use Modules\Properties\Property;
 
 class PredictionResource extends Resource
 {
@@ -75,6 +75,12 @@ class PredictionResource extends Resource
                 Tables\Columns\TextColumn::make('text')
                     ->label('Текст предсказания')
                     ->limit(50),
+                  Tables\Columns\TextColumn::make('type.value')
+                      ->label('Тип'),
+                  Tables\Columns\TextColumn::make('gender.value')
+                      ->label('Целевой пол'),
+                  Tables\Columns\TextColumn::make('sign.value')
+                      ->label('Знак зодиака'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Создано')
                     ->date('d.m.Y H:i'),

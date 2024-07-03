@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Modules\Cities\Models\City;
-use Modules\Properties\Models\Property;
+use Modules\Properties\Property;
 use Modules\Users\Models\User;
 use Modules\Users\Models\UserProperties;
 use Modules\Users\Models\UserSettings;

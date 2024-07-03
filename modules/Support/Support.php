@@ -1,0 +1,38 @@
+<?php
+
+namespace Modules\Support;
+
+use Illuminate\Database\Eloquent\Model;
+use Modules\Users\Models\User;
+
+class Support extends Model
+{
+    public $timestamps = true;
+
+    protected $fillable = [
+        'text',
+        'answer',
+        'user_id',
+        'status',
+    ];
+
+    public const NEW = 0;
+    public const IN_PROGRESS = 1;
+    public const DONE = 2;
+
+    public const STATUSES = [
+        Support::NEW => 'Новое',
+        Support::IN_PROGRESS => 'Обрабатывается',
+        Support::DONE => 'Обработано',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function getStatusNameAttribute()
+    {
+        return Support::STATUSES[$this->status];
+    }
+}

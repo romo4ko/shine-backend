@@ -7,7 +7,7 @@ namespace Database\Seeders;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Modules\Cities\Models\City;
-use Modules\Properties\Models\Property;
+use Modules\Properties\Property;
 use Modules\Users\Models\User;
 use Modules\Users\Models\UserImage;
 use Modules\Users\Zodiac;

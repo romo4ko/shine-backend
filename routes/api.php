@@ -9,6 +9,7 @@ use Modules\Chats\Controllers\MessageController;
 use Modules\Cities\Controllers\CitiesController;
 use Modules\Likes\LikeController;
 use Modules\Predictions\PredictionController;
+use Modules\Support\SupportController;
 use Modules\Users\Controllers\UserController;
 use Modules\Users\Controllers\UserImageController;
 
@@ -79,5 +80,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::group(['prefix' => 'prediction'], function () {
         Route::get('/get', [PredictionController::class, 'getPrediction'])
             ->name('prediction.get');
+    });
+
+    Route::group(['prefix' => 'support'], function () {
+        Route::get('/create', [SupportController::class, 'create'])
+            ->name('support.create');
     });
 });

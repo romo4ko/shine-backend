@@ -6,7 +6,7 @@ namespace Modules\Users\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Modules\Properties\Models\Property;
+use Modules\Properties\Property;
 
 class UserResource extends JsonResource
 {
