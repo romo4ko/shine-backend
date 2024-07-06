@@ -50,7 +50,7 @@ class PredictionResource extends Resource
                         $property->getId('gender', 'female') => 'Женский',
                     ]),
                 Forms\Components\Select::make('sign_id')
-                    ->label('Целевой пол')
+                    ->label('Целевой знак зодиака')
                     ->options([
                         $property->getId('zodiac', 'aries') => 'Овен',
                         $property->getId('zodiac', 'taurus') => 'Телец',
@@ -78,7 +78,7 @@ class PredictionResource extends Resource
                   Tables\Columns\TextColumn::make('type.value')
                       ->label('Тип'),
                   Tables\Columns\TextColumn::make('gender.value')
-                      ->label('Целевой пол'),
+                      ->label('Пол'),
                   Tables\Columns\TextColumn::make('sign.value')
                       ->label('Знак зодиака'),
                 Tables\Columns\TextColumn::make('created_at')

@@ -2,6 +2,8 @@
 
 namespace Modules\Support;
 
+use Carbon\Carbon;
+use Filament\Forms\Components\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Users\Models\User;
 
@@ -34,5 +36,13 @@ class Support extends Model
     public function getStatusNameAttribute()
     {
         return Support::STATUSES[$this->status];
+    }
+
+    public function getProcessedAtAttribute(): Carbon|null
+    {
+        if ($this->status !== Support::NEW) {
+            return $this->updated_at;
+        }
+        return null;
     }
 }

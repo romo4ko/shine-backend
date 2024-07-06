@@ -34,7 +34,20 @@ class SupportResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Textarea::make('text')
+                    ->label('Текст обращения')
+                     ->disabled(),
+                Forms\Components\Select::make('status')
+                    ->label('Статус')
+                    ->options(Support::STATUSES),
+                Forms\Components\Textarea::make('answer')
+                     ->formatStateUsing(function (Support $record) {
+                         return $record->answer ?? $record->user->properties->name . config('messages.template.support.answer');
+                     })
+                     ->label('Текст ответа')
+                     ->disabled(function (Support $record) {
+                         return $record->status !== Support::NEW;
+                     }),
             ]);
     }
 
@@ -46,12 +59,17 @@ class SupportResource extends Resource
                       ->label('Текст обращения')
                       ->limit(50),
                   Tables\Columns\TextColumn::make('user.email')
-                      ->label('Пользователь'),
+                      ->label('Пользователь')
+                      ->url(fn ($record) => "/admin/users/{$record->user->id}"),
                   Tables\Columns\TextColumn::make('statusName')
                       ->label('Статус'),
                   Tables\Columns\TextColumn::make('created_at')
                       ->date('d.m.Y H:i')
                       ->label('Создано'),
+                  Tables\Columns\TextColumn::make('processed_at')
+                      ->label('Обработано')
+                      ->date('d.m.Y H:i')
+                      ->placeholder('-'),
             ])
             ->filters([
                   Filter::make('new')
@@ -69,7 +87,7 @@ class SupportResource extends Resource
                       ->label('Обработанные'),
               ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                  Tables\Actions\EditAction::make()->label('Ответить'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -83,7 +83,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
 
     Route::group(['prefix' => 'support'], function () {
-        Route::get('/create', [SupportController::class, 'create'])
+        Route::post('/create', [SupportController::class, 'create'])
             ->name('support.create');
     });
 });
