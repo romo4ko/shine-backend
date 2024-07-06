@@ -27,7 +27,7 @@ class AuthController extends Controller
 
         if (! $user || ! Hash::check($request->password, $user->password)) {
             return response([
-                'error' => 'Пользователя с такими данными не существует',
+                'error' => config('messages.error.auth.not_found'),
             ]);
         }
 
@@ -60,7 +60,7 @@ class AuthController extends Controller
 
         if (User::where('email', $request->email)->first() != null) {
             return response([
-                'error' => 'Пользователь с такой почтой уже существует',
+                'error' => config('messages.error.auth.exists'),
             ]);
         }
 
@@ -103,7 +103,7 @@ class AuthController extends Controller
 
         if (! $user) {
             return response([
-                'error' => 'Пользователь не авторизован',
+                'error' => config('messages.error.auth.unauthorized')
             ]);
         }
 

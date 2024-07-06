@@ -33,8 +33,8 @@ return [
     // Есть ли дети
     'children' => [
         [
-            'code' => 'yes',
-            'value' => 'Да',
+            'code' => 'have',
+            'value' => 'Есть',
         ],
         [
             'code' => 'no',
@@ -54,7 +54,7 @@ return [
         ],
         [
             'code' => 'alcohol_neutral',
-            'value' => 'Нет, но хотелось бы',
+            'value' => 'Нейтрально',
         ],
         [
             'code' => 'alcohol_positive',
@@ -70,7 +70,7 @@ return [
         ],
         [
             'code' => 'smoking_neutral',
-            'value' => 'Нет, но хотелось бы',
+            'value' => 'Нейтрально',
         ],
         [
             'code' => 'smoking_positive',
