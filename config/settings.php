@@ -19,7 +19,7 @@ return [
                 'from' => 18,
                 'to' => 40,
             ],
-            'destination' => [
+            'destiny' => [
                 'from' => 1,
                 'to' => 100,
             ],

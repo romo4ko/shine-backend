@@ -43,6 +43,13 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
         Route::get('/me', [UserController::class, 'getCurrentUser'])
             ->name('user.self');
+
+        Route::group(['prefix' => 'filter'], function () {
+            Route::post('/set', [UserController::class, 'setFilter'])
+                ->name('user.filter.set');
+            Route::get('/get', [UserController::class, 'getFilter'])
+                ->name('user.filter.get');
+        });
     });
 
     Route::group(['prefix' => 'likes'], function () {

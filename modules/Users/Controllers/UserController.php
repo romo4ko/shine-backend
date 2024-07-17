@@ -155,4 +155,40 @@ class UserController extends Controller
             'status' => 'success',
         ];
     }
+
+    public function setFilter(Request $request)
+    {
+        $request->validate([
+           'gender' => 'required',
+           'age' => 'required',
+           'destiny' => 'required',
+       ]);
+
+        $this->user->settings->filter = $request->only([
+            'gender',
+            'age',
+            'destiny',
+        ]);
+        $this->user->settings->save();
+
+        return [
+            'status' => 'success',
+        ];
+    }
+
+    public function getFilter(Property $property)
+    {
+        $available = ['male', 'female', 'all'];
+
+        $purpose = $property->find($this->user->properties->purpose);
+
+        if (in_array($purpose->code, ['marriage', 'relationship'])) {
+            //
+        }
+
+        return [
+            'filter' => $this->user->settings->filter,
+            'available' => $available,
+        ];
+    }
 }
