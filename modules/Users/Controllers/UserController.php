@@ -126,7 +126,7 @@ class UserController extends Controller
                 );
         }
 
-        // TODO: add sign
+        // TODO: add tags
 
         return [
             'status' => 'success',

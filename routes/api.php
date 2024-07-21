@@ -7,6 +7,7 @@ use Modules\Auth\Controllers\AuthController;
 use Modules\Chats\Controllers\ChatController;
 use Modules\Chats\Controllers\MessageController;
 use Modules\Cities\Controllers\CitiesController;
+use Modules\Documents\DocumentController;
 use Modules\Likes\LikeController;
 use Modules\Predictions\PredictionController;
 use Modules\Support\SupportController;
@@ -94,3 +95,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
             ->name('support.create');
     });
 });
+
+Route::get('/document', [DocumentController::class, 'index'])
+    ->name('document.get');

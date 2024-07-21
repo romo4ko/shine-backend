@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             PropertiesSeeder::class,
             CitiesSeeder::class,
             PredictionsSeeder::class,
+            DocumentSeeder::class,
         ]);
 
         if (env('APP_DEBUG')) {
