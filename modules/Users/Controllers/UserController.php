@@ -26,7 +26,7 @@ class UserController extends Controller
         $this->user = Auth::guard('api')->user();
     }
 
-    public function getUsersList(Request $request): UserCollection
+    public function getUsersList(Property $property): UserCollection
     {
         $user = Auth::user();
 
@@ -36,7 +36,25 @@ class UserController extends Controller
             return $page;
         });
 
-        $users = User::where('email', '!=', 'admin@admin.ru')->paginate($count);
+        $filter = $this->user->settings->filter ?? config('settings.users.filter');
+        if ($filter['gender'] == 'all' || is_null($filter['gender'])) {
+            $gender = null;
+        } else {
+            $gender = $property->getId('gender', $filter['gender']);
+        }
+
+        $users = User::query()
+            ->join('user_settings', 'users.id', '=', 'user_settings.user_id')
+            ->join('user_properties', 'users.id', '=', 'user_properties.user_id')
+            ->where('users.id', '!=', $user->id)
+            ->where('status', User::PUBLISHED)
+            ->where('user_settings.active', 1)
+            ->whereDate('user_properties.birthdate', '<=', Carbon::now()->subYears($filter['age']['from']))
+            ->whereDate('user_properties.birthdate', '>=', Carbon::now()->subYears($filter['age']['to']))
+            ->when($gender != null, function ($query) use ($gender) {
+                $query->where('user_properties.gender', $gender);
+            })
+            ->paginate($count);
 
         $lastPage = $users->lastPage();
         if ($page < $lastPage) {
@@ -50,7 +68,7 @@ class UserController extends Controller
         return (new UserCollection($users))
             ->additional([
                 'meta' => [
-                    'key' => 'value',
+                    'filter' => $filter,
                 ],
             ]);
     }
@@ -178,16 +196,26 @@ class UserController extends Controller
 
     public function getFilter(Property $property)
     {
-        $available = ['male', 'female', 'all'];
+        $available = [];
 
         $purpose = $property->find($this->user->properties->purpose);
+        $gender = $property->find($this->user->properties->gender);
 
-        if (in_array($purpose->code, ['marriage', 'relationship'])) {
-            //
+        if (in_array($purpose->code, ['dates', 'flirting', 'relationship'])) {
+            if ($gender->code == 'male') {
+                $available = ['female'];
+            }
+            elseif ($gender->code == 'female') {
+                $available = ['male'];
+            }
+        } else {
+            $available = ['male', 'female', 'all'];
         }
 
+        $filter = $this->user->settings->filter ?? config('settings.users.filter');
+
         return [
-            'filter' => $this->user->settings->filter,
+            'filter' => $filter,
             'available' => $available,
         ];
     }
