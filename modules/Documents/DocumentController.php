@@ -13,6 +13,6 @@ class DocumentController extends Controller
             'slug' => 'required|string',
         ]);
 
-        return Document::where('slug', $request->slug)->get();
+        return Document::where('slug', $request->slug)->first();
     }
 }
