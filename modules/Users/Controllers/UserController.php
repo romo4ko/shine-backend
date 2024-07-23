@@ -156,7 +156,11 @@ class UserController extends Controller
 
     public function getUserDetail(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'user' => 'required|exists:users,id',
+        ]);
+
+        return new UserResource($user->find($request->user));
     }
 
     public function getCurrentUser(User $user)
@@ -177,10 +181,10 @@ class UserController extends Controller
     public function setFilter(Request $request)
     {
         $request->validate([
-           'gender' => 'required',
-           'age' => 'required',
-           'destiny' => 'required',
-       ]);
+            'gender' => 'required',
+            'age' => 'required',
+            'destiny' => 'required',
+        ]);
 
         $this->user->settings->filter = $request->only([
             'gender',
@@ -204,8 +208,7 @@ class UserController extends Controller
         if (in_array($purpose->code, ['dates', 'flirting', 'relationship'])) {
             if ($gender->code == 'male') {
                 $available = ['female'];
-            }
-            elseif ($gender->code == 'female') {
+            } elseif ($gender->code == 'female') {
                 $available = ['male'];
             }
         } else {

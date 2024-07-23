@@ -17,6 +17,8 @@ class PredictionResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-sparkles';
 
+    protected static ?int $navigationSort = 4;
+
     protected static ?string $navigationLabel = 'Предсказания';
 
     protected static ?string $modeLabel = 'Предсказания';
@@ -75,12 +77,12 @@ class PredictionResource extends Resource
                 Tables\Columns\TextColumn::make('text')
                     ->label('Текст предсказания')
                     ->limit(50),
-                  Tables\Columns\TextColumn::make('type.value')
-                      ->label('Тип'),
-                  Tables\Columns\TextColumn::make('gender.value')
-                      ->label('Пол'),
-                  Tables\Columns\TextColumn::make('sign.value')
-                      ->label('Знак зодиака'),
+                Tables\Columns\TextColumn::make('type.value')
+                    ->label('Тип'),
+                Tables\Columns\TextColumn::make('gender.value')
+                    ->label('Пол'),
+                Tables\Columns\TextColumn::make('sign.value')
+                    ->label('Знак зодиака'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Создано')
                     ->date('d.m.Y H:i'),

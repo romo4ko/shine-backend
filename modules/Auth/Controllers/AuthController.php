@@ -103,7 +103,7 @@ class AuthController extends Controller
 
         if (! $user) {
             return response([
-                'error' => config('messages.error.auth.unauthorized')
+                'error' => config('messages.error.auth.unauthorized'),
             ]);
         }
 

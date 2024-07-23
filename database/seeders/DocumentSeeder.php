@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Modules\Documents\Document;
 
@@ -22,12 +21,12 @@ class DocumentSeeder extends Seeder
             [
                 'name' => 'Политика конфиденциальности',
                 'slug' => 'policy',
-                'text' => file_get_contents(__DIR__ . '/documents/policy.txt'),
+                'text' => file_get_contents(__DIR__.'/documents/policy.txt'),
             ],
             [
                 'name' => 'Пользовательское соглашение',
                 'slug' => 'agreement',
-                'text' => file_get_contents(__DIR__ . '/documents/policy.txt'),
+                'text' => file_get_contents(__DIR__.'/documents/policy.txt'),
             ],
         ];
 

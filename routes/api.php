@@ -28,6 +28,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::get('/list', [UserController::class, 'getUsersList'])
             ->name('users.list');
 
+        Route::get('/detail', [UserController::class, 'getUserDetail'])
+            ->name('users.detail');
+
         Route::post('/updateProperties', [UserController::class, 'updateProperties'])
             ->name('user.updateProperties');
 

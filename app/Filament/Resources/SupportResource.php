@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\SupportResource\Pages;
-use App\Filament\Resources\SupportResource\RelationManagers;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -11,7 +10,6 @@ use Filament\Tables;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Modules\Support\Support;
 
 class SupportResource extends Resource
@@ -19,6 +17,8 @@ class SupportResource extends Resource
     protected static ?string $model = Support::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-oval-left-ellipsis';
+
+    protected static ?int $navigationSort = 2;
 
     protected static ?string $navigationLabel = 'Поддержка';
 
@@ -36,18 +36,18 @@ class SupportResource extends Resource
             ->schema([
                 Forms\Components\Textarea::make('text')
                     ->label('Текст обращения')
-                     ->disabled(),
+                    ->disabled(),
                 Forms\Components\Select::make('status')
                     ->label('Статус')
                     ->options(Support::STATUSES),
                 Forms\Components\Textarea::make('answer')
-                     ->formatStateUsing(function (Support $record) {
-                         return $record->answer ?? $record->user->properties->name . config('messages.template.support.answer');
-                     })
-                     ->label('Текст ответа')
-                     ->disabled(function (Support $record) {
-                         return $record->status !== Support::NEW;
-                     }),
+                    ->formatStateUsing(function (Support $record) {
+                        return $record->answer ?? $record->user->properties->name.config('messages.template.support.answer');
+                    })
+                    ->label('Текст ответа')
+                    ->disabled(function (Support $record) {
+                        return $record->status !== Support::NEW;
+                    }),
             ]);
     }
 
@@ -55,39 +55,39 @@ class SupportResource extends Resource
     {
         return $table
             ->columns([
-                  Tables\Columns\TextColumn::make('text')
-                      ->label('Текст обращения')
-                      ->limit(50),
-                  Tables\Columns\TextColumn::make('user.email')
-                      ->label('Пользователь')
-                      ->url(fn ($record) => "/admin/users/{$record->user->id}"),
-                  Tables\Columns\TextColumn::make('statusName')
-                      ->label('Статус'),
-                  Tables\Columns\TextColumn::make('created_at')
-                      ->date('d.m.Y H:i')
-                      ->label('Создано'),
-                  Tables\Columns\TextColumn::make('processed_at')
-                      ->label('Обработано')
-                      ->date('d.m.Y H:i')
-                      ->placeholder('-'),
+                Tables\Columns\TextColumn::make('text')
+                    ->label('Текст обращения')
+                    ->limit(50),
+                Tables\Columns\TextColumn::make('user.email')
+                    ->label('Пользователь')
+                    ->url(fn ($record) => "/admin/users/{$record->user->id}"),
+                Tables\Columns\TextColumn::make('statusName')
+                    ->label('Статус'),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->date('d.m.Y H:i')
+                    ->label('Создано'),
+                Tables\Columns\TextColumn::make('processed_at')
+                    ->label('Обработано')
+                    ->date('d.m.Y H:i')
+                    ->placeholder('-'),
             ])
             ->filters([
-                  Filter::make('new')
-                      ->toggle()
-                      ->query(fn (Builder $query): Builder => $query->orWhere('status', Support::NEW))
-                      ->label('Новые')
-                      ->default(),
-                  Filter::make('in_progress')
-                      ->toggle()
-                      ->query(fn (Builder $query): Builder => $query->orWhere('status', Support::IN_PROGRESS))
-                      ->label('В обработке'),
-                  Filter::make('done')
-                      ->toggle()
-                      ->query(fn (Builder $query): Builder => $query->orWhere('status', Support::DONE))
-                      ->label('Обработанные'),
-              ])
+                Filter::make('new')
+                    ->toggle()
+                    ->query(fn (Builder $query): Builder => $query->orWhere('status', Support::NEW))
+                    ->label('Новые')
+                    ->default(),
+                Filter::make('in_progress')
+                    ->toggle()
+                    ->query(fn (Builder $query): Builder => $query->orWhere('status', Support::IN_PROGRESS))
+                    ->label('В обработке'),
+                Filter::make('done')
+                    ->toggle()
+                    ->query(fn (Builder $query): Builder => $query->orWhere('status', Support::DONE))
+                    ->label('Обработанные'),
+            ])
             ->actions([
-                  Tables\Actions\EditAction::make()->label('Ответить'),
+                Tables\Actions\EditAction::make()->label('Ответить'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

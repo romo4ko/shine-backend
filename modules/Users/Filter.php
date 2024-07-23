@@ -4,5 +4,4 @@ namespace Modules\Users;
 
 class Filter
 {
-
 }
