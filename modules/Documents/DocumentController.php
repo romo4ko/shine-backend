@@ -11,12 +11,13 @@ class DocumentController extends Controller
     {
         if ($request->route()->getPrefix() === 'api') {
             $request->validate([
-               'slug' => 'required|string',
+                'slug' => 'required|string',
             ]);
+
             return Document::where('slug', $request->slug)->first();
         } else {
             return view('document', [
-                'document' => Document::where('slug', $request->slug)->first()
+                'document' => Document::where('slug', $request->slug)->first(),
             ]);
         }
     }

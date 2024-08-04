@@ -42,6 +42,10 @@ class SupportResource extends Resource
                     ->options(Support::STATUSES),
                 Forms\Components\Textarea::make('answer')
                     ->formatStateUsing(function (Support $record) {
+                        if (is_null($record->user)) {
+                            return $record->answer ?? $record->email.config('messages.template.support.answer');
+                        }
+
                         return $record->answer ?? $record->user->properties->name.config('messages.template.support.answer');
                     })
                     ->label('Текст ответа')
@@ -60,7 +64,10 @@ class SupportResource extends Resource
                     ->limit(50),
                 Tables\Columns\TextColumn::make('user.email')
                     ->label('Пользователь')
-                    ->url(fn ($record) => "/admin/users/{$record->user->id}"),
+                    ->default(fn ($record) => ! is_null($record->user) ? $record->user->email : $record->email)
+                    ->url(fn ($record) => ! is_null($record->user) ? "/admin/users/{$record->user->id}" : '')
+                    ->icon('heroicon-o-x-circle')
+                    ->iconColor('warning'),
                 Tables\Columns\TextColumn::make('statusName')
                     ->label('Статус'),
                 Tables\Columns\TextColumn::make('created_at')

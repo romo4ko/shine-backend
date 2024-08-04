@@ -17,6 +17,11 @@ const routes: Array<RouteRecordRaw> = [
     },
     component: () => import('@/views/LoginPage.vue')
   },
+  {
+    name: 'Support',
+    path: '/support',
+    component: () => import('@/views/SupportPage.vue')
+  },
 ];
 
 const router = createRouter({

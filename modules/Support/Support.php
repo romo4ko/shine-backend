@@ -14,6 +14,7 @@ class Support extends Model
         'text',
         'answer',
         'user_id',
+        'email',
         'status',
     ];
 

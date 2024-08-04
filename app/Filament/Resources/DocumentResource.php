@@ -41,8 +41,8 @@ class DocumentResource extends Resource
                     ->label('Название документа')
                     ->required(),
                 Forms\Components\TextInput::make('slug')
-                     ->label('Код документа')
-                     ->required(),
+                    ->label('Код документа')
+                    ->required(),
             ]);
     }
 

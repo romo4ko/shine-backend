@@ -92,11 +92,11 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::get('/get', [PredictionController::class, 'getPrediction'])
             ->name('prediction.get');
     });
+});
 
-    Route::group(['prefix' => 'support'], function () {
-        Route::post('/create', [SupportController::class, 'create'])
-            ->name('support.create');
-    });
+Route::group(['prefix' => 'support'], function () {
+    Route::post('/create', [SupportController::class, 'create'])
+        ->name('support.create');
 });
 
 Route::get('/document', [DocumentController::class, 'index'])

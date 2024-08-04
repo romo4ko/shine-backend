@@ -6,6 +6,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
+use Modules\Users\Models\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Modules\Users\Models\User>
@@ -25,6 +26,7 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
+            'status' => User::PUBLISHED,
         ];
     }
 
