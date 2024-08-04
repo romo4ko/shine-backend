@@ -40,6 +40,9 @@ class DocumentResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->label('Название документа')
                     ->required(),
+                Forms\Components\TextInput::make('slug')
+                     ->label('Код документа')
+                     ->required(),
             ]);
     }
 
@@ -49,6 +52,11 @@ class DocumentResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label('Название документа'),
+                Tables\Columns\TextColumn::make('url')
+                    ->url(fn (Document $document): string => route('document.show', ['slug' => $document->slug]))
+                    ->openUrlInNewTab()
+                    ->default(fn (Document $document): string => implode('/', [env('APP_URL'), 'document', $document->slug]))
+                    ->label('Ссылка'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Создан')
                     ->date('d.m.Y H:i'),

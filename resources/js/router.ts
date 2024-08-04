@@ -5,7 +5,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'HomePage',
     path: '/',
     meta: {
-      requiresAuth: true,
+      requiresAuth: false,
     },
     component: () => import('@/views/HomePage.vue')
   },
