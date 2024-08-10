@@ -66,7 +66,8 @@ class UserResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->label('Почта')
-                    ->searchable(),
+                    ->searchable()
+                    ->copyable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->date('d.m.Y H:i')
                     ->label('Зарегистрирован'),

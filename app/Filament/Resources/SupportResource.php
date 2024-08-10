@@ -78,6 +78,7 @@ class SupportResource extends Resource
                     ->date('d.m.Y H:i')
                     ->placeholder('-'),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 Filter::make('new')
                     ->toggle()

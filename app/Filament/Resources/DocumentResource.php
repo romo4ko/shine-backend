@@ -42,6 +42,7 @@ class DocumentResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('slug')
                     ->label('Код документа')
+                    ->disabled(fn (Document $document): bool => $document->slug == 'policy' || $document->slug == 'agreement')
                     ->required(),
             ]);
     }
