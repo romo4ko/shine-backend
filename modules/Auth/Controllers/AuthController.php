@@ -29,6 +29,9 @@ class AuthController extends Controller
             return response([
                 'error' => config('messages.error.auth.not_found'),
             ]);
+        } else {
+            $user->login_at = Carbon::now();
+            $user->save();
         }
 
         if (is_null($user->properties->name) ||
@@ -67,6 +70,7 @@ class AuthController extends Controller
         $user = User::create([
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'login_at' => Carbon::now(),
         ]);
 
         $birthdate = Carbon::createFromFormat('d.m.Y', $request->birthdate);
