@@ -7,8 +7,9 @@ namespace Modules\Chats\Resources;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Lang;
 
-class MessagesResource extends JsonResource
+class MessageResource extends JsonResource
 {
     public static $wrap = null;
 
@@ -25,7 +26,7 @@ class MessagesResource extends JsonResource
 
     public function getTime(): string
     {
-        $updated = Carbon::parse($this->updated_at);
+        $updated = Carbon::parse($this->created_at);
         if ($updated->isToday()) {
             return $updated->format('H:i');
         }
@@ -34,6 +35,11 @@ class MessagesResource extends JsonResource
             return 'вчера';
         }
 
-        return $updated->diffInDays(Carbon::now()).' дней';
+        $diff = $updated->diffInDays(Carbon::now());
+        if ($diff < 10) {
+            return $updated->diffInDays(Carbon::now()).Lang::choice(' день| дня| дней', $diff, [], 'ru');
+        } else {
+            return $updated->format('m/y');
+        }
     }
 }

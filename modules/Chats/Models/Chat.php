@@ -9,15 +9,21 @@ use Modules\Users\Models\User;
 
 class Chat extends Model
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'initiator_id',
         'companion_id',
+        'status',
     ];
+
+    const DEFAULT = 0;
+
+    const REJECTED = 1;
+
+    const CONFIRMED = 2;
+
+    const BLOCKED_BY_INITIATOR = 3;
+
+    const BLOCKED_BY_COMPANION = 4;
 
     public function initiator()
     {

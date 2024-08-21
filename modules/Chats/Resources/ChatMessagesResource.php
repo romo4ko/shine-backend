@@ -7,7 +7,6 @@ namespace Modules\Chats\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
-use Modules\Users\Models\User;
 
 class ChatMessagesResource extends JsonResource
 {
@@ -31,15 +30,10 @@ class ChatMessagesResource extends JsonResource
             'user_id' => $companion->id,
             'self_id' => $currentUserId,
             'user_name' => $companion->properties->name,
-            'image' => $this->getMainImage($companion),
+            'image' => $companion->getMainImage(),
             'is_online' => false,
             'is_viewed_by_user' => false,
-            'messages' => MessagesResource::collection($this->messages),
+            'messages' => MessageResource::collection($this->messages),
         ];
-    }
-
-    public function getMainImage(User $companion)
-    {
-        return env('APP_URL').'/storage'.$companion->images[0]->path;
     }
 }

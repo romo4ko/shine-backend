@@ -15,6 +15,7 @@ return new class() extends Migration
             $table->id();
             $table->foreignId('initiator_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('companion_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

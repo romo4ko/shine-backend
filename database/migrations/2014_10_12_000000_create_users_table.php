@@ -17,6 +17,7 @@ return new class() extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->integer('status')->default('0');
             $table->string('password');
+            $table->timestamp('login_at')->nullable();
             $table->timestamps();
         });
     }

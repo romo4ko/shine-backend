@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
-use Modules\Users\Models\User;
+use Illuminate\Support\Facades\Lang;
 
 class ChatResource extends JsonResource
 {
@@ -25,7 +25,7 @@ class ChatResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $companion->properties->name,
-            'image' => $this->getMainImage($companion),
+            'image' => $companion->getMainImage(),
             'last_message' => count($this->messages) === 0 ? '' : $this->messages->last()->text,
             'time' => $this->getTime(),
             'is_viewed' => true,
@@ -34,7 +34,10 @@ class ChatResource extends JsonResource
 
     public function getTime(): string
     {
-        $updated = Carbon::parse($this->updated_at);
+        $updated = count($this->messages) === 0 ?
+            Carbon::parse($this->updated_at) :
+            Carbon::parse($this->messages->last()->created_at);
+
         if ($updated->isToday()) {
             return $updated->format('H:i');
         }
@@ -43,11 +46,11 @@ class ChatResource extends JsonResource
             return 'вчера';
         }
 
-        return $updated->diffInDays(Carbon::now()).' дней';
-    }
-
-    public function getMainImage(User $companion)
-    {
-        return env('APP_URL').'/storage'.$companion->images[0]->path;
+        $diff = $updated->diffInDays(Carbon::now());
+        if ($diff < 10) {
+            return $updated->diffInDays(Carbon::now()).Lang::choice(' день| дня| дней', $diff, [], 'ru');
+        } else {
+            return $updated->format('d.m.Y');
+        }
     }
 }
