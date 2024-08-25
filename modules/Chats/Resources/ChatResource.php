@@ -28,7 +28,8 @@ class ChatResource extends JsonResource
             'image' => $companion->getMainImage(),
             'last_message' => count($this->messages) === 0 ? '' : $this->messages->last()->text,
             'time' => $this->getTime(),
-            'is_viewed' => true,
+            'is_viewed' => $this->messages->last()?->sender_id !== $currentUserId && $this->messages->last()?->is_viewed === 0,
+            'status' => $this->statusCode
         ];
     }
 

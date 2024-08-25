@@ -119,7 +119,10 @@ class AuthController extends Controller
         }
 
         return response([
-            'user' => $user,
+            'user' => [
+                ...$user->toArray(),
+                'is_premium' => false
+            ],
             'filled' => $filled,
         ]);
     }

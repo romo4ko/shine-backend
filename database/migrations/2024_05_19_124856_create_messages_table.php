@@ -17,6 +17,7 @@ return new class() extends Migration
             $table->foreignId('sender_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('text')->nullable();
             $table->json('content')->nullable();
+            $table->boolean('is_viewed')->default(false);
             $table->timestamps();
         });
     }

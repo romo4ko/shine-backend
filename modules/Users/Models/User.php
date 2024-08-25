@@ -43,17 +43,6 @@ class User extends Authenticatable
 
     public const PUBLISHED = 4;
 
-    public function getStatuses(): array
-    {
-        return array_reduce(config('properties.user_statuses'), function ($status, $item) {
-            $key = strval($item['code']);
-            $value = $item['value'];
-            $status[$key] = $value;
-
-            return $status;
-        }, []);
-    }
-
     public function getStatusNameAttribute(): string
     {
         $statuses = config('properties.user_statuses');

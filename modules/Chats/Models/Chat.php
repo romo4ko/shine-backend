@@ -15,15 +15,21 @@ class Chat extends Model
         'status',
     ];
 
+    protected $additional = [
+        'status_code',
+    ];
+
     const DEFAULT = 0;
 
-    const REJECTED = 1;
+    const REQUESTED = 1;
 
-    const CONFIRMED = 2;
+    const REJECTED = 2;
 
-    const BLOCKED_BY_INITIATOR = 3;
+    const CONFIRMED = 3;
 
-    const BLOCKED_BY_COMPANION = 4;
+    const BLOCKED_BY_INITIATOR = 4;
+
+    const BLOCKED_BY_COMPANION = 5;
 
     public function initiator()
     {
@@ -33,6 +39,20 @@ class Chat extends Model
     public function companion()
     {
         return $this->belongsTo(User::class, 'companion_id');
+    }
+
+    public function getStatusCodeAttribute(): string
+    {
+        $statuses = [
+            self::DEFAULT => 'default',
+            self::REQUESTED => 'requested',
+            self::REJECTED => 'rejected',
+            self::CONFIRMED => 'confirmed',
+            self::BLOCKED_BY_INITIATOR => 'blocked_by_initiator',
+            self::BLOCKED_BY_COMPANION => 'blocked_by_companion',
+        ];
+
+        return $statuses[$this->status];
     }
 
     public function messages()

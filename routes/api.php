@@ -83,6 +83,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
         Route::post('/send', [MessageController::class, 'send'])
             ->name('message.send');
+
+        Route::post('/request', [MessageController::class, 'request'])
+            ->name('message.request');
     });
 
     Route::get('/cities', [CitiesController::class, 'getCity'])
