@@ -34,6 +34,7 @@ class ChatMessagesResource extends JsonResource
             'is_online' => false,
             'is_viewed_by_user' => false,
             'messages' => MessageResource::collection($this->messages),
+            'status' => $this->statusCode
         ];
     }
 }

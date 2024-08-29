@@ -28,14 +28,20 @@ class MessageController extends Controller
             'chat_id' => 'required',
         ]);
 
+        $chat = Chat::findOrFail($request->chat_id);
+
         if ($request->has('text')) {
             Message::create([
-                'chat_id' => $request->chat_id,
+                'chat_id' => $chat->id,
                 'sender_id' => $this->user->id,
                 'text' => $request->text,
             ]);
         } elseif ($request->has('content')) {
             //
+        }
+
+        if ($chat->status == Chat::REQUESTED) {
+            $chat->update(['status' => Chat::CONFIRMED]);
         }
 
         return ['status' => 'success'];
@@ -45,6 +51,11 @@ class MessageController extends Controller
     // TODO: Отрефакторить метод
     public function request(Request $request)
     {
+        $request->validate([
+               'whom' => 'required',
+               'text' => 'required',
+        ]);
+
         $recipocity = Like::where([
               'who_id' => $request->whom,
               'whom_id' => $this->user->id,

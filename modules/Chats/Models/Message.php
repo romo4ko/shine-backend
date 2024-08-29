@@ -14,10 +14,12 @@ class Message extends Model
         'sender_id',
         'text',
         'content',
+        'is_viewed',
     ];
 
     protected $casts = [
         'content' => 'array',
+        'is_viewed' => 'boolean',
     ];
 
     public function sender()
