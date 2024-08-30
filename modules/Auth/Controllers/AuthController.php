@@ -6,6 +6,7 @@ namespace Modules\Auth\Controllers;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -81,7 +82,7 @@ class AuthController extends Controller
             'sign' => $sign->id,
         ]);
 
-        // TODO: Отправка письма для подтверждения
+        event(new Registered($user));
 
         return response([
             'user' => $user,

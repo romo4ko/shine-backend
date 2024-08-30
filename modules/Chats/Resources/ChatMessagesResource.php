@@ -32,7 +32,7 @@ class ChatMessagesResource extends JsonResource
             'user_name' => $companion->properties->name,
             'image' => $companion->getMainImage(),
             'is_online' => false,
-            'is_viewed' => $this->messages->last()?->sender_id == $currentUserId || $this->messages->last()?->is_viewed === true,
+            'is_viewed' => $this->messages->last()?->sender_id != $currentUserId && $this->messages->last()?->is_viewed === false,
             'messages' => MessageResource::collection($this->messages),
             'status' => $this->statusCode
         ];
