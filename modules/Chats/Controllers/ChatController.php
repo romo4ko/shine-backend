@@ -44,7 +44,7 @@ class ChatController extends Controller
         Message::where('chat_id', $chat->id)
             ->where('sender_id', '!=', $this->user->id)
             ->update([
-                'is_viewed' => true
+                'is_viewed' => true,
             ]);
 
         return new ChatMessagesResource($chat);

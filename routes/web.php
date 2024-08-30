@@ -11,15 +11,14 @@ Route::get('/document/{slug}', [DocumentController::class, 'index'])
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
-})->middleware('auth')->name('verification.notice');
+})->name('verification.notice');
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
 
-    return redirect('/home');
-})->middleware(['auth', 'signed'])->name('verification.verify');
+    return redirect('/');
+})->name('verification.verify');
 
 Route::get('/{any}', fn () => view('spa'))
     ->where('any', '.*')
     ->name('spa');
-

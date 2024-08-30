@@ -46,7 +46,7 @@ class MessageController extends Controller
             $url = env('APP_URL');
 
             $data = [
-                'path' => $url.'/storage'. $path,
+                'path' => $url.'/storage'.$path,
                 'meta' => [
                     'type' => 'image',
                 ],
@@ -74,18 +74,18 @@ class MessageController extends Controller
     public function request(Request $request)
     {
         $request->validate([
-               'whom' => 'required',
-               'text' => 'required',
+            'whom' => 'required',
+            'text' => 'required',
         ]);
 
         $recipocity = Like::where([
-              'who_id' => $request->whom,
-              'whom_id' => $this->user->id,
+            'who_id' => $request->whom,
+            'whom_id' => $this->user->id,
         ])->first();
 
         $like = Like::create([
-             'who_id' => $this->user->id,
-             'whom_id' => $request->whom,
+            'who_id' => $this->user->id,
+            'whom_id' => $request->whom,
         ]);
 
         // Если собеседник уже поставил лайк пользователю обновляем статусы лайков и создаем чат если он не создан
@@ -101,8 +101,8 @@ class MessageController extends Controller
             if ($chat == null) {
 
                 $chat = Chat::create([
-                     'initiator_id' => $this->user->id,
-                     'companion_id' => $request->whom,
+                    'initiator_id' => $this->user->id,
+                    'companion_id' => $request->whom,
                 ]);
             }
         }
@@ -115,9 +115,9 @@ class MessageController extends Controller
             if ($chat == null) {
 
                 $chat = Chat::create([
-                     'initiator_id' => $this->user->id,
-                     'companion_id' => $request->whom,
-                     'status' => Chat::REQUESTED,
+                    'initiator_id' => $this->user->id,
+                    'companion_id' => $request->whom,
+                    'status' => Chat::REQUESTED,
                 ]);
             }
         }
