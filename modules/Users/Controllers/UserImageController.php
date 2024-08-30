@@ -27,8 +27,8 @@ class UserImageController
         $image = $request->image;
         $fileOriginalName = $image->getClientOriginalExtension();
         $fileNewName = $request->sorting.'_'.time().'.'.$fileOriginalName;
-        $path = '/images/'.$this->user->id.'/'.$fileNewName;
-        $image->storeAs('/images/'.$this->user->id, $fileNewName, 'public');
+        $path = '/images/users/'.$this->user->id.'/'.$fileNewName;
+        $image->storeAs('/images/users/'.$this->user->id, $fileNewName, 'public');
 
         $last = $this->user
             ->images()

@@ -1,4 +1,6 @@
 *
 !.gitignore
 images
-!images/stubs
+!images/stubs/
+!images/users/
+!images/chats/

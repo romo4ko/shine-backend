@@ -22,6 +22,7 @@ class MessageController extends Controller
         $this->user = Auth::guard('sanctum')->user();
     }
 
+    // TODO: Refactoring
     public function send(Request $request)
     {
         $request->validate([
@@ -36,15 +37,36 @@ class MessageController extends Controller
                 'sender_id' => $this->user->id,
                 'text' => $request->text,
             ]);
-        } elseif ($request->has('content')) {
-            //
+        } elseif ($request->has('image')) {
+            $image = $request->image;
+            $fileOriginalName = $image->getClientOriginalExtension();
+            $fileNewName = $request->sorting.'_'.time().'.'.$fileOriginalName;
+            $path = '/images/chats/'.$chat->id.'/'.$fileNewName;
+            $image->storeAs('/images/chats/'.$chat->id, $fileNewName, 'public');
+            $url = env('APP_URL');
+
+            $data = [
+                'path' => $url.'/storage'. $path,
+                'meta' => [
+                    'type' => 'image',
+                ],
+            ];
+
+            Message::create([
+                'chat_id' => $chat->id,
+                'sender_id' => $this->user->id,
+                'content' => $data,
+            ]);
         }
 
         if ($chat->status == Chat::REQUESTED) {
             $chat->update(['status' => Chat::CONFIRMED]);
         }
 
-        return ['status' => 'success'];
+        return [
+            'status' => 'success',
+            'data' => $data ?? null,
+        ];
     }
 
     // Метод для отправки запроса собеседнику на переписку
