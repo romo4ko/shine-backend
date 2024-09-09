@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace Modules\Auth\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Mail\VerifyEmail;
 use Carbon\Carbon;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use Modules\Email\EmailConfirmToken;
 use Modules\Users\Models\User;
 use Modules\Users\Zodiac;
 
@@ -82,7 +85,13 @@ class AuthController extends Controller
             'sign' => $sign->id,
         ]);
 
-        event(new Registered($user));
+        $emailCheckToken = Str::random(30);
+        EmailConfirmToken::create([
+            'user_id' => $user->id,
+            'token' => $emailCheckToken,
+        ]);
+
+        Mail::to($user->email)->send(new VerifyEmail($user, $emailCheckToken));
 
         return response([
             'user' => $user,
