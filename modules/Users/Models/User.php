@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace Modules\Users\Models;
 
+use App\Observers\UserObserver;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Modules\Properties\Property;
 
+#[ObservedBy([UserObserver::class])]
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens;
@@ -32,6 +34,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
         'login_at' => 'datetime',
+        'status' => 'integer',
     ];
 
     public const CONFIRMATION = 0;
@@ -49,23 +52,6 @@ class User extends Authenticatable implements MustVerifyEmail
         $statuses = config('properties.user_statuses');
 
         return $statuses[$this->status]['value'];
-    }
-
-    protected static function booted(): void
-    {
-        static::created(function (User $user) {
-            $property = new Property();
-            UserSettings::query()->create([
-                'user_id' => $user->id,
-                'active' => true,
-                'bot_settings' => $property->getId('prediction_types', 'mixed'),
-                'pagination' => config('settings.users.pagination'),
-                'filter' => config('settings.users.filter'),
-            ]);
-            UserProperties::query()->create([
-                'user_id' => $user->id,
-            ]);
-        });
     }
 
     public function properties()

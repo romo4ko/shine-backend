@@ -14,22 +14,15 @@ class VerifyEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $user;
+    protected User $user;
+    protected string $token;
 
-    protected $token;
-
-    /**
-     * Create a new message instance.
-     */
     public function __construct(User $user, string $token)
     {
         $this->user = $user;
         $this->token = $token;
     }
 
-    /**
-     * Get the message envelope.
-     */
     public function envelope(): Envelope
     {
         return new Envelope(
@@ -38,26 +31,18 @@ class VerifyEmail extends Mailable
         );
     }
 
-    /**
-     * Get the message content definition.
-     */
     public function content(): Content
     {
         $url = route('email.verify', ['user_id' => $this->user->id, 'token' => $this->token]);
 
         return new Content(
-            view: 'mail.verify',
+            view: 'emails.email.verify-email',
             with: [
                 'url' => $url,
             ],
         );
     }
 
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
     public function attachments(): array
     {
         return [];

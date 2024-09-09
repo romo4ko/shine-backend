@@ -3,15 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Подтверждение почты</title>
+    <title>{{ config('app.name') }}</title>
 </head>
 <body class="h-full">
     <div class="px-4 pb-4">
         <h1>
-            {{ $status['title'] }}
+            {{ $message['title'] }}
         </h1>
         <p>
-            {{ $status['description'] }}
+            {{ $message['description'] }}
         </p>
     </div>
 </body>

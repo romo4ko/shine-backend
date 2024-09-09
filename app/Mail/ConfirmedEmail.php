@@ -25,7 +25,7 @@ class ConfirmedEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.confirmed',
+            view: 'emails.email.email-confirmed',
         );
     }
 

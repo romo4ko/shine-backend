@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Подтверждение почты</title>
 </head>
-<body class="h-full">
-    <div class="px-4 pb-4">
+<body>
+    <div>
         <p>Чтобы подтвердить адрес электронной почты, пожалуйста, кликните по ссылке ниже.</p>
         <a class="btn" target="_blank" href="{{ $url }}">Подтвердить</a>
     </div>

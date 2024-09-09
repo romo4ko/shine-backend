@@ -12,7 +12,7 @@ use Modules\Users\Models\User;
 
 class EmailController extends Controller
 {
-    public function verify($user_id, $token): View
+    public function verify(int $user_id, string $token): View
     {
         $tokenData = EmailConfirmToken::where('user_id', $user_id)
             ->where('token', $token)
@@ -30,17 +30,17 @@ class EmailController extends Controller
                 ->locale('ru')
                 ->send(new ConfirmedEmail());
 
-            $status = [
+            $message = [
                 'title' => 'Почта успешно подтверждена!',
                 'description' => 'Анкета была отправлена на модерацию. После проверки анкеты, вы получите уведомление на почту.',
             ];
         } else {
-            $status = [
+            $message = [
                 'title' => 'Произошла ошибка!',
                 'description' => 'Похоже, ссылка не действительна. Попробуйте отправить письмо повторно из вашего профиля в приложении.',
             ];
         }
 
-        return view('mail.status', ['status' => $status]);
+        return view('pages.message', ['message' => $message]);
     }
 }
