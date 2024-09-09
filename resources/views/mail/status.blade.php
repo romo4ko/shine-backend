@@ -6,16 +6,14 @@
     <title>Подтверждение почты</title>
 </head>
 <body class="h-full">
-<div>
-    <main class="px-4 pb-4">
+    <div class="px-4 pb-4">
         <h1>
-            {{ $status->title }}
+            {{ $status['title'] }}
         </h1>
         <p>
-            {{ $status->description }}
+            {{ $status['description'] }}
         </p>
-    </main>
-</div>
+    </div>
 </body>
 </html>
 

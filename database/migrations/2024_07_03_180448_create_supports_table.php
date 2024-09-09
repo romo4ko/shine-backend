@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text('text');
             $table->text('answer')->nullable()->default(null);
-            $table->foreignId('user_id')->nullable()->constrained('users');
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('email')->nullable();
             $table->integer('status')->default(0);
             $table->timestamps();
