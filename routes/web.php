@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-use Modules\Email\EmailController;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 use Modules\Documents\DocumentController;
+use Modules\Email\EmailController;
 
 Route::get('/document/{slug}', [DocumentController::class, 'index'])
     ->name('document.show');

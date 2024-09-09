@@ -91,7 +91,9 @@ class AuthController extends Controller
             'token' => $emailCheckToken,
         ]);
 
-        Mail::to($user->email)->send(new VerifyEmail($user, $emailCheckToken));
+        Mail::to($user->email)
+            ->locale('ru')
+            ->send(new VerifyEmail($user, $emailCheckToken));
 
         return response([
             'user' => $user,
