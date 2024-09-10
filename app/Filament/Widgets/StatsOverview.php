@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Illuminate\Support\Facades\DB;
+use Modules\Support\Support;
 use Modules\Users\Models\User;
 
 class StatsOverview extends BaseWidget
@@ -20,6 +21,7 @@ class StatsOverview extends BaseWidget
             // TODO: Входы в приложение за этот месяц
             // TODO: Куплено премиум-аккаунтов
             Stat::make('Анкет на модерации', User::where('status', User::MODERATION)->count()),
+            Stat::make('Новых обращений в поддержку', Support::where('status', Support::NEW)->count()),
         ];
     }
 

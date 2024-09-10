@@ -51,7 +51,8 @@ class UserResource extends Resource
                         User::PUBLISHED => $statuses[User::PUBLISHED]['value'],
                         User::BLOCKED => $statuses[User::BLOCKED]['value'],
                         User::REJECTED => $statuses[User::REJECTED]['value'],
-                    ]),
+                    ])
+                    ->disabled(fn ($record) => $record->status != User::MODERATION),
             ]);
     }
 
