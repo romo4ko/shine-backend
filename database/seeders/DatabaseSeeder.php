@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             CitiesSeeder::class,
             PredictionsSeeder::class,
             DocumentSeeder::class,
+            PricesSeeder::class,
         ]);
 
         if (env('APP_DEBUG')) {

@@ -11,6 +11,7 @@ use Modules\Documents\DocumentController;
 use Modules\Likes\LikeController;
 use Modules\Predictions\PredictionController;
 use Modules\Support\SupportController;
+use Modules\Premium\Controllers\PremiumController;
 use Modules\Users\Controllers\UserController;
 use Modules\Users\Controllers\UserImageController;
 
@@ -53,6 +54,11 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
                 ->name('user.filter.set');
             Route::get('/get', [UserController::class, 'getFilter'])
                 ->name('user.filter.get');
+        });
+
+        Route::group(['prefix' => 'premium'], function () {
+            Route::get('/prices', [PremiumController::class, 'getPrices'])
+                ->name('user.premium.prices');
         });
     });
 

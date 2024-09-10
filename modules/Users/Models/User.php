@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace Modules\Users\Models;
 
 use App\Observers\UserObserver;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\Premium\Models\PremiumUser;
 
 #[ObservedBy([UserObserver::class])]
 class User extends Authenticatable implements MustVerifyEmail
@@ -18,6 +20,8 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasApiTokens;
     use HasFactory;
     use Notifiable;
+
+    public $timestamps = true;
 
     protected $fillable = [
         'email',
@@ -37,6 +41,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'status' => 'integer',
     ];
 
+    protected $appends = [
+        'is_premium',
+    ];
+
     public const CONFIRMATION = 0;
 
     public const MODERATION = 1;
@@ -52,6 +60,11 @@ class User extends Authenticatable implements MustVerifyEmail
         $statuses = config('properties.user_statuses');
 
         return $statuses[$this->status]['value'];
+    }
+
+    public function getIsPremiumAttribute(): bool
+    {
+        return $this->isPremium();
     }
 
     public function properties()
@@ -76,5 +89,12 @@ class User extends Authenticatable implements MustVerifyEmail
         }
 
         return null;
+    }
+
+    public function isPremium(): bool
+    {
+        return PremiumUser::where('user_id', $this->id)
+            ->where('expire_at', '>', Carbon::now())
+            ->exists();
     }
 }
