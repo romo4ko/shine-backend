@@ -44,7 +44,7 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('email')->label('Почта')
                     ->disabled(),
                 Forms\Components\Select::make('status')
-                    ->label('status')
+                    ->label('Статус')
                     ->options([
                         User::CONFIRMATION => $statuses[User::CONFIRMATION]['value'],
                         User::MODERATION => $statuses[User::MODERATION]['value'],
