@@ -3,15 +3,11 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\EnviromentResource\Pages;
-use App\Filament\Resources\EnviromentResource\RelationManagers;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Modules\Documents\Document;
 use Modules\Premium\Models\Price;
 
 class PricesResource extends Resource
@@ -41,12 +37,12 @@ class PricesResource extends Resource
     {
         return $form
             ->schema([
-                 Forms\Components\TextInput::make('name')
-                     ->label('Тариф')
-                     ->disabled(),
-                 Forms\Components\TextInput::make('price')
-                     ->label('Цена')
-                     ->required(),
+                Forms\Components\TextInput::make('name')
+                    ->label('Тариф')
+                    ->disabled(),
+                Forms\Components\TextInput::make('price')
+                    ->label('Цена')
+                    ->required(),
             ]);
     }
 

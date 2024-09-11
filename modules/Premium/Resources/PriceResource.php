@@ -25,7 +25,7 @@ class PriceResource extends JsonResource
                     'name' => $this->name,
                     'price' => $this->price,
                     'code' => $this->code,
-                ]
+                ],
             ];
         }
 
@@ -35,7 +35,7 @@ class PriceResource extends JsonResource
                 'price' => $this->price,
                 'code' => $this->code,
                 'cost' => ($this->price * $discount / 100),
-            ]
+            ],
         ];
 
     }

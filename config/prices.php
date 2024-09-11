@@ -3,20 +3,20 @@
 return [
     [
         'plan' => 'first',
-        'name'  => 'Неделя',
+        'name' => 'Неделя',
         'price' => 400,
-        'code'  => 'week'
+        'code' => 'week',
     ],
     [
         'plan' => 'second',
         'name' => 'Месяц',
         'price' => 1000,
-        'code' => 'month'
+        'code' => 'month',
     ],
     [
         'plan' => 'third',
         'name' => '3 месяца',
         'price' => 2000,
-        'code' => 'three_months'
-    ]
+        'code' => 'three_months',
+    ],
 ];

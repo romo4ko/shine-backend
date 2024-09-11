@@ -4,9 +4,11 @@ namespace Modules\Email;
 
 use App\Http\Controllers\Controller;
 use App\Mail\ConfirmedEmail;
+use App\Mail\VerifyEmail;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Modules\Users\Models\User;
 
@@ -21,7 +23,9 @@ class EmailController extends Controller
         if ($tokenData !== null) {
             $user = User::find($tokenData->user_id);
             $user->email_verified_at = Carbon::now();
-            $user->status = User::MODERATION;
+            if ($user->status == User::CONFIRMATION) {
+                $user->status = User::MODERATION;
+            }
             $user->save();
 
             $tokenData->delete();
@@ -42,5 +46,22 @@ class EmailController extends Controller
         }
 
         return view('pages.message', ['message' => $message]);
+    }
+
+    public function sendConfirmationEmail()
+    {
+        $user = Auth::guard('api')->user();
+
+        $emailCheckToken = Str::random(30);
+        EmailConfirmToken::create([
+            'user_id' => $user->id,
+            'token' => $emailCheckToken,
+        ]);
+
+        Mail::to($user->email)
+            ->locale('ru')
+            ->send(new VerifyEmail($user, $emailCheckToken));
+
+        return ['status' => 'success'];
     }
 }

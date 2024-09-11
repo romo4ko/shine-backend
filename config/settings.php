@@ -29,6 +29,6 @@ return [
     'premium' => [
         'discount' => 70,
         'expires_after' => 14,
-    ]
+    ],
 
 ];

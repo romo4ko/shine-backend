@@ -15,6 +15,7 @@ class VerifyEmail extends Mailable
     use Queueable, SerializesModels;
 
     protected User $user;
+
     protected string $token;
 
     public function __construct(User $user, string $token)

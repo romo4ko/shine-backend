@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Modules\Documents\Document;
 use Modules\Premium\Models\Price;
 
 class PricesSeeder extends Seeder

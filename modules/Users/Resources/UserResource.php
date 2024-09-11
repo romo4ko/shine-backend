@@ -7,6 +7,7 @@ namespace Modules\Users\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Modules\Properties\Property;
+use Modules\Users\Models\User;
 
 class UserResource extends JsonResource
 {
@@ -25,6 +26,7 @@ class UserResource extends JsonResource
             'image' => $this->getMainImage(),
             'is_premium' => $this->is_premium,
             'active' => $this->settings->active,
+            'is_email_confirmed' => $this->status == User::CONFIRMATION ? false : true,
             'bot_settings' => $this->getSettings($this->settings->bot_settings),
             'profile_filled' => $this->getProfileFilledPercentage($properties),
             'invites' => 0,

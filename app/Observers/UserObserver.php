@@ -3,7 +3,6 @@
 namespace App\Observers;
 
 use App\Mail\UserStatusChanged;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Modules\Properties\Property;
 use Modules\Users\Models\User;
@@ -19,12 +18,12 @@ class UserObserver
     {
         $property = new Property();
         UserSettings::query()->create([
-              'user_id' => $user->id,
-              'active' => true,
-              'bot_settings' => $property->getId('prediction_types', 'mixed'),
-              'pagination' => config('settings.users.pagination'),
-              'filter' => config('settings.users.filter'),
-          ]);
+            'user_id' => $user->id,
+            'active' => true,
+            'bot_settings' => $property->getId('prediction_types', 'mixed'),
+            'pagination' => config('settings.users.pagination'),
+            'filter' => config('settings.users.filter'),
+        ]);
         UserProperties::query()->create([
             'user_id' => $user->id,
         ]);

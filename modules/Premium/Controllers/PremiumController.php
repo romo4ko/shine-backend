@@ -27,13 +27,14 @@ class PremiumController extends Controller
         if (Carbon::now()->diffInDays($this->user->created_at) < $expiresAfterInDays) {
             return PriceResource::collection(Price::all())
                 ->additional([
-                   'meta' => [
-                       'secondsLeft' => Carbon::now()->diffInSeconds(
-                           $this->user->created_at->addDays($expiresAfterInDays)
-                       )
-                   ],
-               ]);
+                    'meta' => [
+                        'secondsLeft' => Carbon::now()->diffInSeconds(
+                            $this->user->created_at->addDays($expiresAfterInDays)
+                        ),
+                    ],
+                ]);
         }
+
         return PriceResource::collection(Price::all());
     }
 }

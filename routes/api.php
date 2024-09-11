@@ -8,10 +8,11 @@ use Modules\Chats\Controllers\ChatController;
 use Modules\Chats\Controllers\MessageController;
 use Modules\Cities\Controllers\CitiesController;
 use Modules\Documents\DocumentController;
+use Modules\Email\EmailController;
 use Modules\Likes\LikeController;
 use Modules\Predictions\PredictionController;
-use Modules\Support\SupportController;
 use Modules\Premium\Controllers\PremiumController;
+use Modules\Support\SupportController;
 use Modules\Users\Controllers\UserController;
 use Modules\Users\Controllers\UserImageController;
 
@@ -60,6 +61,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
             Route::get('/prices', [PremiumController::class, 'getPrices'])
                 ->name('user.premium.prices');
         });
+
+        Route::post('/email/verify', [EmailController::class, 'sendConfirmationEmail'])
+            ->name('user.email.verify');
     });
 
     Route::group(['prefix' => 'likes'], function () {

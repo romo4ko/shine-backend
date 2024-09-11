@@ -36,7 +36,7 @@ class StatsOverview extends BaseWidget
             $count = DB::table('users')
                 ->whereBetween('created_at', [
                     $startTime,
-                    $endTime
+                    $endTime,
                 ])
                 ->count();
             $results[] = $count;
