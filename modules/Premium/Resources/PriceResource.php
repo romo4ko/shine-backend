@@ -21,21 +21,19 @@ class PriceResource extends JsonResource
 
         if (Carbon::now()->diffInDays($user->created_at) > $expiresAfterInDays) {
             return [
-                $this->plan => [
-                    'name' => $this->name,
-                    'price' => $this->price,
-                    'code' => $this->code,
-                ],
+                'plan' => $this->plan,
+                'name' => $this->name,
+                'price' => $this->price,
+                'code' => $this->code,
             ];
         }
 
         return [
-            $this->plan => [
-                'name' => $this->name,
-                'price' => $this->price,
-                'code' => $this->code,
-                'cost' => ($this->price * $discount / 100),
-            ],
+            'plan' => $this->plan,
+            'name' => $this->name,
+            'price' => $this->price,
+            'code' => $this->code,
+            'cost' => ($this->price * $discount / 100),
         ];
 
     }

@@ -28,9 +28,10 @@ class PremiumController extends Controller
             return PriceResource::collection(Price::all())
                 ->additional([
                     'meta' => [
-                        'secondsLeft' => Carbon::now()->diffInSeconds(
+                        'seconds_left' => Carbon::now()->diffInSeconds(
                             $this->user->created_at->addDays($expiresAfterInDays)
                         ),
+                        'discount' => config('settings.premium.discount'),
                     ],
                 ]);
         }
